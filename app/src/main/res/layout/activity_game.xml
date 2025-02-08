@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GameActivity">
+
+    <ImageButton
+        android:id="@+id/button_0_0"
+        android:layout_width="40pt"
+        android:layout_height="40pt"
+        android:src="@color/black"
+        tools:ignore="MissingConstraints" />
+    <ImageButton
+        android:id="@+id/button_0_1"
+        android:layout_width="40pt"
+        android:layout_height="40pt"
+        app:layout_constraintLeft_toRightOf="@+id/button_0_0"
+        android:src="@color/black"
+        tools:ignore="MissingConstraints" />
+    <ImageButton
+        android:id="@+id/button_0_2"
+        android:layout_width="40pt"
+        android:layout_height="40pt"
+        android:src="@color/black"
+        app:layout_constraintLeft_toRightOf="@+id/button_0_1"
+        tools:ignore="MissingConstraints" />
+    <ImageButton
+        android:id="@+id/button_0_3"
+        android:layout_width="40pt"
+        android:layout_height="40pt"
+        android:src="@color/black"
+        app:layout_constraintLeft_toRightOf="@+id/button_0_2"
+        tools:ignore="MissingConstraints" />
+
+    <ImageButton
+        android:id="@+id/button_1_0"
+        android:layout_width="40pt"
+        android:layout_height="40pt"
+        android:src="@color/black"
+        app:layout_constraintTop_toBottomOf="@+id/button_0_0"
+        tools:ignore="MissingConstraints" />
+
+    <ImageButton
+        android:id="@+id/button_1_1"
+        android:layout_width="40pt"
+        android:layout_height="40pt"
+        android:src="@color/black"
+        app:layout_constraintLeft_toRightOf="@+id/button_1_0"
+        app:layout_constraintTop_toBottomOf="@+id/button_0_1"
+        tools:ignore="MissingConstraints" />
+    <ImageButton
+        android:id="@+id/button_1_2"
+        android:layout_width="40pt"
+        android:layout_height="40pt"
+        android:src="@color/black"
+        app:layout_constraintLeft_toRightOf="@+id/button_1_1"
+        app:layout_constraintTop_toBottomOf="@+id/button_0_2"
+        tools:ignore="MissingConstraints" />
+    <ImageButton
+        android:id="@+id/button_1_3"
+        android:layout_width="40pt"
+        android:layout_height="40pt"
+        android:src="@color/black"
+        app:layout_constraintLeft_toRightOf="@+id/button_1_2"
+        app:layout_constraintTop_toBottomOf="@+id/button_0_3"
+        tools:ignore="MissingConstraints" />
+    <ImageButton
+        android:id="@+id/button_2_0"
+        android:layout_width="40pt"
+        android:layout_height="40pt"
+        android:src="@color/black"
+        app:layout_constraintTop_toBottomOf="@+id/button_1_0"
+        tools:ignore="MissingConstraints" />
+
+    <ImageButton
+        android:id="@+id/button_2_1"
+        android:layout_width="40pt"
+        android:layout_height="40pt"
+        android:src="@color/black"
+        app:layout_constraintLeft_toRightOf="@+id/button_2_0"
+        app:layout_constraintTop_toBottomOf="@+id/button_1_1"
+        tools:ignore="MissingConstraints" />
+    <ImageButton
+        android:id="@+id/button_2_2"
+        android:layout_width="40pt"
+        android:layout_height="40pt"
+        android:src="@color/black"
+        app:layout_constraintLeft_toRightOf="@+id/button_2_1"
+        app:layout_constraintTop_toBottomOf="@+id/button_1_2"
+        tools:ignore="MissingConstraints" />
+    <ImageButton
+        android:id="@+id/button_2_3"
+        android:layout_width="40pt"
+        android:layout_height="40pt"
+        android:src="@color/black"
+        app:layout_constraintLeft_toRightOf="@+id/button_2_2"
+        app:layout_constraintTop_toBottomOf="@+id/button_1_3"
+        tools:ignore="MissingConstraints" />
+    <ImageButton
+        android:id="@+id/button_3_0"
+        android:layout_width="40pt"
+        android:layout_height="40pt"
+        android:src="@color/black"
+        app:layout_constraintTop_toBottomOf="@+id/button_2_0"
+        tools:ignore="MissingConstraints" />
+
+    <ImageButton
+        android:id="@+id/button_3_1"
+        android:layout_width="40pt"
+        android:layout_height="40pt"
+        android:src="@color/black"
+        app:layout_constraintLeft_toRightOf="@+id/button_3_0"
+        app:layout_constraintTop_toBottomOf="@+id/button_2_1"
+        tools:ignore="MissingConstraints" />
+    <ImageButton
+        android:id="@+id/button_3_2"
+        android:layout_width="40pt"
+        android:layout_height="40pt"
+        android:src="@color/black"
+        app:layout_constraintLeft_toRightOf="@+id/button_3_1"
+        app:layout_constraintTop_toBottomOf="@+id/button_2_2"
+        tools:ignore="MissingConstraints" />
+    <ImageButton
+        android:id="@+id/button_3_3"
+        android:layout_width="40pt"
+        android:layout_height="40pt"
+        android:src="@color/black"
+        app:layout_constraintLeft_toRightOf="@+id/button_3_2"
+        app:layout_constraintTop_toBottomOf="@+id/button_2_3"
+        tools:ignore="MissingConstraints" />
+</androidx.constraintlayout.widget.ConstraintLayout>

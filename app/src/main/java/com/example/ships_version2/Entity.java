@@ -1,0 +1,75 @@
+package com.example.ships_version2;
+
+import android.nfc.Tag;
+import android.util.Log;
+
+import java.util.Random;
+
+public class Entity {
+    private int ship_pos[][];
+    private int bomb_pos[][];
+    private int size;
+    public int hp;
+
+    public void setBomb_pos(int[][] bomb_pos) {
+        this.bomb_pos = bomb_pos;
+    }
+
+    public void setShip_pos(int[][] ship_pos) {
+        this.ship_pos = ship_pos;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+    public Entity(int size) {
+        this.bomb_pos = new int[size][size];
+        this.ship_pos = new int[size][size];
+        this.size = size;
+        this.hp = 2;
+    }
+
+    public int[][] getBomb_pos() {
+        return bomb_pos;
+    }
+
+    public int[][] getShip_pos() {
+        return ship_pos;
+    }
+
+    void Create_field() {
+        Random random = new Random();
+        for (int i = 0; i < size; i++) {
+            int k = random.nextInt(4);
+            int j = random.nextInt(4);
+            if (ship_pos[k][j] == 0) {
+                ship_pos[k][j]++;
+                Log.d("ActivityPlayingField", "Entity ship" + k + j);
+            }
+        }
+        for (int i = 0; i < size; i++) {
+            int k = random.nextInt(4);
+            int j = random.nextInt(4);
+            if (bomb_pos[k][j] == 0) {
+                bomb_pos[k][j]++;
+                Log.d("ActivityPlayingField", "Entity bomb" + k + j);
+            }
+        }
+    }
+
+    int[][] Atack_rand() {
+        Random random = new Random();
+        int[][] res = new int[3][2];
+        for (int i = 0; i < size; i++) {
+            int k = random.nextInt(4);
+            int j = random.nextInt(4);
+            if (ship_pos[k][j] == 0) {
+                res[i][0] = k;
+                res[i][1] = j;
+                Log.d("ActivityPlayingField", "Entity atack" + k + j);
+            }
+        }
+        return res;
+    }
+}
