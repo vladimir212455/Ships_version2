@@ -9,7 +9,7 @@ public class Entity {
     private int ship_pos[][];
     private int bomb_pos[][];
     private int size;
-    public int hp;
+    public int hp = 2;
 
     public void setBomb_pos(int[][] bomb_pos) {
         this.bomb_pos = bomb_pos;
@@ -60,13 +60,13 @@ public class Entity {
 
     int[][] Atack_rand() {
         Random random = new Random();
-        int[][] res = new int[3][2];
+        int[][] res = new int[3][3];
         for (int i = 0; i < size; i++) {
-            int k = random.nextInt(4);
-            int j = random.nextInt(4);
+            int k = random.nextInt(3);
+            int j = random.nextInt(3);
             if (ship_pos[k][j] == 0) {
-                res[i][0] = k;
-                res[i][1] = j;
+                res[k][j] ++;
+                res[k][j] ++;
                 Log.d("ActivityPlayingField", "Entity atack" + k + j);
             }
         }

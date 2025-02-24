@@ -1,65 +1,64 @@
 package com.example.ships_version2;
 
 import static com.example.ships_version2.GameActivity.bomb_pos;
-import static com.example.ships_version2.GameActivity.buttons;
 import static com.example.ships_version2.GameActivity.ship_pos;
 
-import android.annotation.SuppressLint;
+import static java.lang.Thread.currentThread;
+import static java.lang.Thread.sleep;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageButton;
 
-import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.ships_version2.databinding.ActivityGameMatchBinding;
-import com.example.ships_version2.databinding.ActivityMainBinding;
 
-import java.util.Calendar;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class GameMatch extends AppCompatActivity {
-    ActivityGameMatchBinding binding;
+    private ActivityGameMatchBinding binding;
     private static final String LOG_TAG = "ActivityPlayingField";
-    private PrefsManager prefsManager;
-    Entity entity;
-    Boolean state_game = true;
-    ImageButton[][] buttons1;
-    int hp;
-//    @Override
-//    public void onPause()
-//    {
-//        super.onPause();
-//        try {
-//            prefsManager.Set_state(entity, ship_pos, bomb_pos);
-//        }
-//      catch (Exception e)
-//      {
-//            throw new RuntimeException(e);
-//      }
-//        Log.d(LOG_TAG, "create Atcivity");
-//    }
-//
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        try {
-//            entity.setBomb_pos(prefsManager.getEntity_bomb());
-//            entity.setShip_pos(prefsManager.getEntity_ship());
-//            ship_pos = prefsManager.getPlayer_ship();
-//            bomb_pos = prefsManager.getPlayer_bomb();
-//
-//        }
-//        catch (Exception e)
-//        {
-//            throw new RuntimeException(e);
-//        }
-//    }
+    private Entity entity;
+    private Boolean state_game = true;
+    static ImageButton[][] buttons1;
+    private int hp;
+    private int hours = 0;
+    private int minutes = 0;
+    private int seconds = 0;
+    int at = 0;
+    @Override
+    public void onPause()
+    {
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("time1", hours);
+        outState.putInt("time2", minutes);
+        outState.putInt("time3", seconds);
+        outState.putInt("hp", hp);
+        outState.putInt("hp_entity", entity.hp);
+
+    }
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        hours =  savedInstanceState.getInt("time1");
+        minutes =  savedInstanceState.getInt("time2");
+        seconds =  savedInstanceState.getInt("time3");
+        hp =  savedInstanceState.getInt("hp");
+        entity.hp =  savedInstanceState.getInt("hp_entity");
+    }
 
     public static Intent getInstance(Context context) {
         return new Intent(context, GameMatch.class);
@@ -80,56 +79,155 @@ public class GameMatch extends AppCompatActivity {
                 {binding.button30, binding.button31, binding.button32, binding.button33},
         };
         Log.d(LOG_TAG, "TIme");
-        binding.Time.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Runnable runnable = new Runnable() {
-                    @Override
-                    public void run() {
-                        Calendar c = Calendar.getInstance();
-                        int hours = c.get(Calendar.HOUR_OF_DAY);
-                        int minutes = c.get(Calendar.MINUTE);
-                        int seconds = c.get(Calendar.SECOND);
-                        String time = hours + ":" + minutes + ":" + seconds;
-                        binding.Time.post(new Runnable() {
-                            public void run() {
-                                binding.Time.setText(time);
+        Thread thread = getThread();
+        thread.start();
+        Thread thread1 = getThread1();
+        thread1.start();
+        Thread thread2 = getThread2();
+        thread2.start();
+
+        entity_atack1();
+
+        Runnable runnable = new Runnable() {
+                @Override
+                public void run() {
+                    Log.d(LOG_TAG, "start user_curect atack");
+                    for (int j = 0; j < 4; j++) {
+                        for (int k = 0; k < 4; k++) {
+                            int finalJ = j;
+                            int finalK = k;
+
+                            try {
+                                if (!buttons1[finalJ][finalK].isActivated()) {
+                                    buttons1[finalJ][finalK].setOnClickListener(v -> {
+                                        if (at < 3 && entity.hp > 0) {
+                                            if (entity.getShip_pos()[finalJ][finalK] == 1) {
+                                                Log.d(LOG_TAG, "DMG_ent");
+                                                entity.hp--;
+                                            }
+                                            Log.d(LOG_TAG, "Click");
+                                            buttons1[finalJ][finalK].setImageResource(R.drawable.img);
+                                            at++;
+                                        } else if (at < 3 && hp > 0) {
+                                            if (entity.getBomb_pos()[finalJ][finalK] == 1) {
+                                                Log.d(LOG_TAG, "DMG");
+                                                hp--;
+                                            }
+                                            Log.d(LOG_TAG, "Click");
+                                            buttons1[finalJ][finalK].setImageResource(R.drawable.img);
+
+                                            at++;
+                                        }
+                                    });
+                                }
+                            } catch (Exception ex) {
+                                Log.d(LOG_TAG, ex.getMessage().toString());
                             }
-                        });
+                        }
                     }
-                };
-                Thread thread = new Thread(runnable);
-                thread.start();
-            }
-        });
-
-
-
-//            while (state_game) {
-//            curect_entity(entity.Atack_rand());
-//            curect_user();
-//        }
-
+                }
+            };
+            Thread thread3 = new Thread(runnable);
+            thread3.start() ;
+            Thread thread4 = startcheckeAT();
+            thread4.start();
     }
 
-
-    private void curect_user() {
+    private Thread startcheckeAT() {
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    // Log.d(LOG_TAG, "st");
+                    if(at >= 3) {
+                        entity_atack1();
+                        at = 0;
+                    }
+                }
+            }
+        };
+        return new Thread(runnable);
     }
 
-    private void curect_entity(int[][] atacks) {
-        for (int i = 0; i < atacks.length; i++) {
-            if(ship_pos[atacks[i][0]][atacks[i][1]] == 1)
-            {
-                buttons1[atacks[i][0]][atacks[i][1]].setImageResource(R.drawable.img);
-                hp--;
-            }
-            if(bomb_pos[atacks[i][0]][atacks[i][1]] == 1)
-            {
-                buttons1[atacks[i][0]][atacks[i][1]].setImageResource(R.drawable.img);
-                entity.hp--;
-            }
+    private void entity_atack1() {
+        int[][] attacks = entity.Atack_rand();
+        Log.d(LOG_TAG, "start curect atack");
 
+        for (int i = 0; i < attacks.length; i++) {
+            for (int j = 0; j < attacks.length; j++) {
+                if (attacks[i][j] > 0 && ship_pos[i][j] > 0) {
+                    Log.d(LOG_TAG, "damage player");
+                    buttons1[i][j].setImageResource(R.drawable.img);
+                    hp--;
+                }
+                if (attacks[i][j] > 0 && bomb_pos[i][j] > 0) {
+                    buttons1[i][j].setImageResource(R.drawable.img);
+                    Log.d(LOG_TAG, "damage entity");
+                    entity.hp--;
+                }
+
+            }
         }
+        Log.d(LOG_TAG, "end curect atack");
 
+    }
+
+
+
+    private Thread getThread2() {
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                binding.HP.post(new Runnable() {
+                    public void run() {
+                        binding.HP.setText(hp + "");
+                    }
+                });
+            }
+        };
+        return new Thread(runnable);
+    }
+
+    private Thread getThread1() {
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                binding.entityHP.setText(entity.hp + "");
+            }
+        };
+        return new Thread(runnable);
+    }
+
+    private @NonNull Thread getThread() {
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    if (seconds > 60)
+                    {
+                        seconds = 0;
+                        minutes++;
+                    }
+                    if (minutes > 60)
+                    {
+                        minutes = 0;
+                        hours++;
+                    }
+                    String time = hours + ":" + minutes + ":" + seconds;
+                    binding.Time.post(new Runnable() {
+                        public void run() {
+                            binding.Time.setText(time);
+                        }
+                    });
+                    seconds++;
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+        };
+        return new Thread(runnable);
     }
 }

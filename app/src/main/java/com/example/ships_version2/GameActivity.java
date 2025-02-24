@@ -22,7 +22,7 @@ public class GameActivity extends AppCompatActivity {
     private int count_ship = 0;
     private int count_bomb = 0;
     private ActivityGameBinding binding;
-    static  ImageButton[][] buttons;
+    private   ImageButton[][] buttons;
     static int ship_pos[][];
     static int bomb_pos[][];
 
