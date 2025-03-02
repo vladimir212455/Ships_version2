@@ -25,14 +25,10 @@ public class GameActivity extends AppCompatActivity {
     private   ImageButton[][] buttons;
     static int ship_pos[][];
     static int bomb_pos[][];
-
     private static final String LOG_TAG = "ActivityPlayingField";
-
-
     public static Intent getInstance(Context context) {
         return new Intent(context, GameActivity.class);
     }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         binding = ActivityGameBinding.inflate(getLayoutInflater());
@@ -53,7 +49,6 @@ public class GameActivity extends AppCompatActivity {
             for (int k = 0; k < 4; k++) {
                 int finalJ = j;
                 int finalK = k;
-
                 buttons[j][k].setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -72,13 +67,10 @@ public class GameActivity extends AppCompatActivity {
                         if (count_ship >= c_ship && count_bomb >= c_bomb)
                         {  startActivity(GameMatch.getInstance(getApplicationContext()));}
                     }
-
                 });
                 Log.d(LOG_TAG, "Click");
-
             }
         }
-
 
         Log.d(LOG_TAG, "end");
     }

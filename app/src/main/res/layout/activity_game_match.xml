@@ -134,35 +134,60 @@
         app:layout_constraintTop_toBottomOf="@+id/button_2_3"
         tools:ignore="MissingConstraints" />
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/button_3_3"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/button_3_3">
+
         <TextView
             android:id="@+id/HP"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:text="HP"
-            android:background="#FF0000"
             android:layout_weight="1"
+            android:background="#FF0000"
+            android:text="HP"
             android:textSize="26sp" />
+
         <TextView
             android:id="@+id/entity_HP"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_weight="1"
             android:background="#FF0000"
             android:text="entity_HP"
-            android:layout_weight="1"
             android:textSize="26sp" />
+
         <TextView
             android:id="@+id/Time"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:text="Time"
-            android:background="#FF0000"
             android:layout_weight="1"
+            android:background="#FF0000"
+            android:text="Time"
             android:textSize="26sp" />
     </LinearLayout>
+    <TextView
+        android:id="@+id/brightness"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20pt"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+
+        app:layout_constraintBottom_toTopOf="@+id/brightness"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

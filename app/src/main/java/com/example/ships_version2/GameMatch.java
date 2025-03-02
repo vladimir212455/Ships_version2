@@ -1,26 +1,20 @@
 package com.example.ships_version2;
-
 import static com.example.ships_version2.GameActivity.bomb_pos;
 import static com.example.ships_version2.GameActivity.ship_pos;
-
-import static java.lang.Thread.currentThread;
-import static java.lang.Thread.sleep;
-
 import android.content.Context;
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageButton;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
+import androidx.recyclerview.widget.RecyclerView;
 import com.example.ships_version2.databinding.ActivityGameMatchBinding;
-
-import java.util.concurrent.atomic.AtomicInteger;
-
+import java.util.ArrayList;
 public class GameMatch extends AppCompatActivity {
     private ActivityGameMatchBinding binding;
     private static final String LOG_TAG = "ActivityPlayingField";
@@ -32,16 +26,9 @@ public class GameMatch extends AppCompatActivity {
     private int minutes = 0;
     private int seconds = 0;
     int at = 0;
-    @Override
-    public void onPause()
-    {
-        super.onPause();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
+    SensorManager sensorManager;
+    Sensor sensorLight;
+    ArrayList<state> states = new ArrayList<state>();
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -50,7 +37,6 @@ public class GameMatch extends AppCompatActivity {
         outState.putInt("time3", seconds);
         outState.putInt("hp", hp);
         outState.putInt("hp_entity", entity.hp);
-
     }
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
@@ -61,19 +47,31 @@ public class GameMatch extends AppCompatActivity {
         hp =  savedInstanceState.getInt("hp");
         entity.hp =  savedInstanceState.getInt("hp_entity");
     }
-
     public static Intent getInstance(Context context) {
         return new Intent(context, GameMatch.class);
     }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         binding = ActivityGameMatchBinding.inflate(getLayoutInflater());
         super.onCreate(savedInstanceState);
         setContentView(binding.getRoot());
+        sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        sensorLight = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
         hp = 2;
         entity = new Entity(4);
         entity.Create_field();
+        onClickSensLight();
+//        try {
+//        states.add(new state());
+//        states.add(new state());
+//        }catch (Exception ex)
+//        {
+//            Log.d(LOG_TAG, ex.getMessage().toString());
+//        }
+        RecyclerView recyclerView = findViewById(R.id.list);
+        StateAdapter adapter = new StateAdapter(this, states);
+        recyclerView.setAdapter(adapter);
+
         ImageButton[][] buttons1 = {
                 {binding.button00, binding.button01, binding.button02, binding.button03},
                 {binding.button10, binding.button11, binding.button12, binding.button13},
@@ -87,9 +85,7 @@ public class GameMatch extends AppCompatActivity {
         thread1.start();
         Thread thread2 = getThread2();
         thread2.start();
-
         entity_atack1();
-
         Runnable runnable = new Runnable() {
                 @Override
                 public void run() {
@@ -98,7 +94,6 @@ public class GameMatch extends AppCompatActivity {
                         for (int k = 0; k < 4; k++) {
                             int finalJ = j;
                             int finalK = k;
-
                             try {
                                 if (!buttons1[finalJ][finalK].isActivated()) {
                                     buttons1[finalJ][finalK].setOnClickListener(v -> {
@@ -133,7 +128,6 @@ public class GameMatch extends AppCompatActivity {
             Thread thread4 = startcheckeAT();
             thread4.start();
     }
-
     private Thread startcheckeAT() {
         Runnable runnable = new Runnable() {
             @Override
@@ -145,38 +139,27 @@ public class GameMatch extends AppCompatActivity {
                         at = 0;
                     }
                 }
-
             }
         };
         return new Thread(runnable);
     }
-
     private void entity_atack1() {
         int[][] attacks = entity.Atack_rand();
         Log.d(LOG_TAG, "start curect atack");
-
         for (int i = 0; i < attacks.length; i++) {
             for (int j = 0; j < attacks.length; j++) {
                 if (attacks[i][j] > 0 && ship_pos[i][j] > 0) {
                     Log.d(LOG_TAG, "damage player");
-                    //    buttons1[i][j].setImageResource(R.drawable.img);
                     hp--;
                 }
                 if (attacks[i][j] > 0 && bomb_pos[i][j] > 0) {
-                //    buttons1[i][j].setImageResource(R.drawable.img);
                     Log.d(LOG_TAG, "damage entity");
                     entity.hp--;
                 }
-
             }
         }
         Log.d(LOG_TAG, "end curect atack");
-
     }
-
-
-
-
 private Thread getThread2() {
     Runnable runnable = new Runnable() {
         @Override
@@ -209,7 +192,6 @@ private Thread getThread2() {
         };
         return new Thread(runnable);
     }
-
     private @NonNull Thread getThread() {
         Runnable runnable = new Runnable() {
             @Override
@@ -242,4 +224,26 @@ private Thread getThread2() {
         };
         return new Thread(runnable);
     }
+    public void onClickSensLight() {
+        sensorManager.registerListener(listener, sensorLight, SensorManager.SENSOR_DELAY_NORMAL);
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        sensorManager.unregisterListener(listener, sensorLight);
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        sensorManager.registerListener(listener, sensorLight, SensorManager.SENSOR_DELAY_NORMAL);
+    }
+    SensorEventListener listener = new SensorEventListener() {
+        @Override
+        public void onSensorChanged(SensorEvent event) {
+            binding.brightness.setText(String.valueOf(event.values[0]));
+        }
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int accuracy) {
+        }
+    };
 }
