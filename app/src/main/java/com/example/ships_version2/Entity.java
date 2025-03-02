@@ -41,16 +41,16 @@ public class Entity {
     void Create_field() {
         Random random = new Random();
         for (int i = 0; i < size; i++) {
-            int k = random.nextInt(4);
-            int j = random.nextInt(4);
+            int k = random.nextInt(size);
+            int j = random.nextInt(size);
             if (ship_pos[k][j] == 0) {
                 ship_pos[k][j]++;
                 Log.d("ActivityPlayingField", "Entity ship" + k + j);
             }
         }
         for (int i = 0; i < size; i++) {
-            int k = random.nextInt(4);
-            int j = random.nextInt(4);
+            int k = random.nextInt(size);
+            int j = random.nextInt(size);
             if (bomb_pos[k][j] == 0) {
                 bomb_pos[k][j]++;
                 Log.d("ActivityPlayingField", "Entity bomb" + k + j);
@@ -60,10 +60,10 @@ public class Entity {
 
     int[][] Atack_rand() {
         Random random = new Random();
-        int[][] res = new int[3][3];
+        int[][] res = new int[size][size];
         for (int i = 0; i < size; i++) {
-            int k = random.nextInt(3);
-            int j = random.nextInt(3);
+            int k = random.nextInt(size);
+            int j = random.nextInt(size);
             if (ship_pos[k][j] == 0) {
                 res[k][j] ++;
                 res[k][j] ++;

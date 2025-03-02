@@ -10,7 +10,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -115,7 +117,6 @@ public class GameMatch extends AppCompatActivity {
                                             }
                                             Log.d(LOG_TAG, "Click");
                                             buttons1[finalJ][finalK].setImageResource(R.drawable.img);
-
                                             at++;
                                         }
                                     });
@@ -144,6 +145,7 @@ public class GameMatch extends AppCompatActivity {
                         at = 0;
                     }
                 }
+
             }
         };
         return new Thread(runnable);
@@ -157,11 +159,11 @@ public class GameMatch extends AppCompatActivity {
             for (int j = 0; j < attacks.length; j++) {
                 if (attacks[i][j] > 0 && ship_pos[i][j] > 0) {
                     Log.d(LOG_TAG, "damage player");
-                    buttons1[i][j].setImageResource(R.drawable.img);
+                    //    buttons1[i][j].setImageResource(R.drawable.img);
                     hp--;
                 }
                 if (attacks[i][j] > 0 && bomb_pos[i][j] > 0) {
-                    buttons1[i][j].setImageResource(R.drawable.img);
+                //    buttons1[i][j].setImageResource(R.drawable.img);
                     Log.d(LOG_TAG, "damage entity");
                     entity.hp--;
                 }
@@ -174,25 +176,35 @@ public class GameMatch extends AppCompatActivity {
 
 
 
-    private Thread getThread2() {
-        Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                binding.HP.post(new Runnable() {
-                    public void run() {
-                        binding.HP.setText(hp + "");
-                    }
-                });
-            }
-        };
-        return new Thread(runnable);
-    }
 
+private Thread getThread2() {
+    Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            while (true) {
+                binding.entityHP.setText(entity.hp + "");
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+    };
+    return new Thread(runnable);
+}
     private Thread getThread1() {
         Runnable runnable = new Runnable() {
             @Override
-            public void run() {
-                binding.entityHP.setText(entity.hp + "");
+           public void run() {
+                while (true) {
+                    binding.HP.setText(hp + "");
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
             }
         };
         return new Thread(runnable);
