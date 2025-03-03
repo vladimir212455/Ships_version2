@@ -61,13 +61,20 @@ public class GameMatch extends AppCompatActivity {
         entity = new Entity(4);
         entity.Create_field();
         onClickSensLight();
-//        try {
-//        states.add(new state());
-//        states.add(new state());
-//        }catch (Exception ex)
-//        {
-//            Log.d(LOG_TAG, ex.getMessage().toString());
-//        }
+
+        try {
+        states.add(new state());
+        states.add(new state());
+        states.add(new state());
+        states.add(new state());
+        states.add(new state());
+        states.remove(2);
+
+        }catch (Exception ex)
+        {
+            Log.d(LOG_TAG, ex.getMessage().toString());
+        }
+
         RecyclerView recyclerView = findViewById(R.id.list);
         StateAdapter adapter = new StateAdapter(this, states);
         recyclerView.setAdapter(adapter);

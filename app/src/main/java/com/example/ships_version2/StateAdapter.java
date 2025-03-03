@@ -5,8 +5,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.Button;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,11 +26,10 @@ public class StateAdapter  extends RecyclerView.Adapter<StateAdapter.ViewHolder>
         return new ViewHolder(view);
     }
 
-    @SuppressLint("ResourceType")
     @Override
     public void onBindViewHolder(StateAdapter.ViewHolder holder, int position) {
         state state = states.get(position);
-        holder.flagView.setImageResource(R.id.hp_point);
+        holder.flagView.setBackgroundResource(R.drawable.img_1);
     }
 
     @Override
@@ -40,8 +38,7 @@ public class StateAdapter  extends RecyclerView.Adapter<StateAdapter.ViewHolder>
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        final ImageView flagView;
-        @SuppressLint("WrongViewCast")
+        final View flagView;
         ViewHolder(View view){
             super(view);
             flagView = view.findViewById(R.id.hp_point);
