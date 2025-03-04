@@ -27,7 +27,7 @@ public class Entity {
         this.bomb_pos = new int[size][size];
         this.ship_pos = new int[size][size];
         this.size = size;
-        this.hp = 2;
+        this.hp = 4;
     }
 
     public int[][] getBomb_pos() {

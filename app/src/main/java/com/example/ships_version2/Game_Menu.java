@@ -16,7 +16,7 @@ import com.example.ships_version2.databinding.ActivityGameMenuBinding;
 public class Game_Menu extends AppCompatActivity {
     ActivityGameMenuBinding binding;
     public static Intent getInstance(Context context) {
-        return new Intent(context, GameActivity.class);
+        return new Intent(context, Game_Menu.class);
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {

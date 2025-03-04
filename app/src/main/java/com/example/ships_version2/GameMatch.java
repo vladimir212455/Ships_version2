@@ -15,6 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.ships_version2.databinding.ActivityGameMatchBinding;
 import java.util.ArrayList;
+import java.util.logging.Handler;
+
 public class GameMatch extends AppCompatActivity {
     private ActivityGameMatchBinding binding;
     private static final String LOG_TAG = "ActivityPlayingField";
@@ -29,6 +31,8 @@ public class GameMatch extends AppCompatActivity {
     SensorManager sensorManager;
     Sensor sensorLight;
     ArrayList<state> states = new ArrayList<state>();
+    StateAdapter adapter;
+    RecyclerView recyclerView;
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -57,7 +61,7 @@ public class GameMatch extends AppCompatActivity {
         setContentView(binding.getRoot());
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         sensorLight = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
-        hp = 2;
+        hp = 4;
         entity = new Entity(4);
         entity.Create_field();
         onClickSensLight();
@@ -67,16 +71,14 @@ public class GameMatch extends AppCompatActivity {
         states.add(new state());
         states.add(new state());
         states.add(new state());
-        states.add(new state());
-        states.remove(2);
 
         }catch (Exception ex)
         {
             Log.d(LOG_TAG, ex.getMessage().toString());
         }
 
-        RecyclerView recyclerView = findViewById(R.id.list);
-        StateAdapter adapter = new StateAdapter(this, states);
+        recyclerView = findViewById(R.id.list);
+        adapter = new StateAdapter(this, states);
         recyclerView.setAdapter(adapter);
 
         ImageButton[][] buttons1 = {
@@ -116,6 +118,8 @@ public class GameMatch extends AppCompatActivity {
                                             if (entity.getBomb_pos()[finalJ][finalK] == 1) {
                                                 Log.d(LOG_TAG, "DMG");
                                                 hp--;
+                                                states.remove(0);
+                                                adapter.notifyDataSetChanged();
                                             }
                                             Log.d(LOG_TAG, "Click");
                                             buttons1[finalJ][finalK].setImageResource(R.drawable.img);
@@ -158,6 +162,9 @@ public class GameMatch extends AppCompatActivity {
                 if (attacks[i][j] > 0 && ship_pos[i][j] > 0) {
                     Log.d(LOG_TAG, "damage player");
                     hp--;
+                    states.remove(0);
+                    adapter.notifyDataSetChanged();
+
                 }
                 if (attacks[i][j] > 0 && bomb_pos[i][j] > 0) {
                     Log.d(LOG_TAG, "damage entity");
@@ -172,9 +179,12 @@ private Thread getThread2() {
         @Override
         public void run() {
             while (true) {
+                if(entity.hp == 0){
+                    startActivity(Game_Menu.getInstance(binding.getRoot().getContext()));
+                    break;}
                 binding.entityHP.setText(entity.hp + "");
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(700);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
@@ -188,9 +198,12 @@ private Thread getThread2() {
             @Override
            public void run() {
                 while (true) {
+                    if(hp == 0){
+                        startActivity(Game_Menu.getInstance(getApplicationContext()));
+                        break;}
                     binding.HP.setText(hp + "");
                     try {
-                        Thread.sleep(1000);
+                        Thread.sleep(700);
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
@@ -199,6 +212,21 @@ private Thread getThread2() {
         };
         return new Thread(runnable);
     }
+//    private Thread getThread4() {
+//        Runnable runnable = new Runnable() {
+//            @Override
+//            public void run() {
+//                while (true) {
+//                    try {
+//                        Thread.sleep(100);
+//                    } catch (InterruptedException e) {
+//                        throw new RuntimeException(e);
+//                    }
+//                }
+//            }
+//        };
+//        return new Thread(runnable);
+//    }
     private @NonNull Thread getThread() {
         Runnable runnable = new Runnable() {
             @Override

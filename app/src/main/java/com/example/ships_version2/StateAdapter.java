@@ -36,6 +36,11 @@ public class StateAdapter  extends RecyclerView.Adapter<StateAdapter.ViewHolder>
     public int getItemCount() {
         return states.size();
     }
+    public void update(List<state> datas){
+        datas.clear();
+        datas.addAll(datas);
+        notifyDataSetChanged();
+    }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         final View flagView;
