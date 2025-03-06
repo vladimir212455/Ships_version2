@@ -13,26 +13,26 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.ships_version2.databinding.ActivityGameBinding;
+import com.example.ships_version2.databinding.ActivityCountPlayerBinding;
 import com.example.ships_version2.databinding.ActivityGameMenuBinding;
 
-public class Game_Menu extends AppCompatActivity {
-    ActivityGameMenuBinding binding;
+public class count_player extends AppCompatActivity {
+    ActivityCountPlayerBinding binding;
     public static Intent getInstance(Context context) {
-        return new Intent(context, Game_Menu.class);
+        return new Intent(context, count_player.class);
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        binding = ActivityGameMenuBinding.inflate(getLayoutInflater());
+        binding = ActivityCountPlayerBinding.inflate(getLayoutInflater());
         super.onCreate(savedInstanceState);
         setContentView(binding.getRoot());
-        if(winn_ent)
+        binding.one.setOnClickListener(v ->
         {
-            binding.winer.setText("YOU ARE LOOOOOSE");
-        }
-        if(winn_plr)
+            startActivity(GameActivity.getInstance(getApplicationContext()));
+        });
+        binding.one.setOnClickListener(v ->
         {
-            binding.winer.setText("NICE");
-        }
+            startActivity(GameActivity.getInstance(getApplicationContext()));
+        });
     }
 }

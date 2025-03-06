@@ -3,12 +3,15 @@ import static com.example.ships_version2.GameActivity.bomb_pos;
 import static com.example.ships_version2.GameActivity.ship_pos;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +21,10 @@ import java.util.ArrayList;
 import java.util.logging.Handler;
 
 public class GameMatch extends AppCompatActivity {
+    SharedPreferences settings;
+    SharedPreferences.Editor prefEditor;
+    private static final String PREF_NAME = "Name";
+    private static final String PREFS_FILE = "Account";
     private ActivityGameMatchBinding binding;
     private static final String LOG_TAG = "ActivityPlayingField";
     private Entity entity;
@@ -33,6 +40,8 @@ public class GameMatch extends AppCompatActivity {
     ArrayList<state> states = new ArrayList<state>();
     StateAdapter adapter;
     RecyclerView recyclerView;
+    static boolean winn_ent;
+    static boolean winn_plr;
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -90,10 +99,10 @@ public class GameMatch extends AppCompatActivity {
         Log.d(LOG_TAG, "TIme");
         Thread thread = getThread();
         thread.start();
-        Thread thread1 = getThread1();
-        thread1.start();
-        Thread thread2 = getThread2();
-        thread2.start();
+//        Thread thread1 = getThread1();
+//        thread1.start();
+//        Thread thread2 = getThread2();
+//        thread2.start();
         entity_atack1();
         Runnable runnable = new Runnable() {
                 @Override
@@ -110,6 +119,12 @@ public class GameMatch extends AppCompatActivity {
                                             if (entity.getShip_pos()[finalJ][finalK] == 1) {
                                                 Log.d(LOG_TAG, "DMG_ent");
                                                 entity.hp--;
+                                                binding.entityHP.setText(entity.hp + "");
+                                                if(entity.hp == 0){
+                                                    winn_plr= true;
+                                                    startActivity(Game_Menu.getInstance(binding.getRoot().getContext()));
+                                                }
+
                                             }
                                             Log.d(LOG_TAG, "Click");
                                             buttons1[finalJ][finalK].setImageResource(R.drawable.img);
@@ -118,6 +133,11 @@ public class GameMatch extends AppCompatActivity {
                                             if (entity.getBomb_pos()[finalJ][finalK] == 1) {
                                                 Log.d(LOG_TAG, "DMG");
                                                 hp--;
+                                                binding.HP.setText(hp + "");
+                                                if(hp == 0){
+                                                    winn_ent= true;
+                                                    startActivity(Game_Menu.getInstance(getApplicationContext()));
+                                                }
                                                 states.remove(0);
                                                 adapter.notifyDataSetChanged();
                                             }
@@ -162,6 +182,12 @@ public class GameMatch extends AppCompatActivity {
                 if (attacks[i][j] > 0 && ship_pos[i][j] > 0) {
                     Log.d(LOG_TAG, "damage player");
                     hp--;
+                    binding.HP.setText(hp + "");
+                    if(hp == 0){
+                        winn_ent= true;
+                        startActivity(Game_Menu.getInstance(getApplicationContext()));
+                    }
+
                     states.remove(0);
                     adapter.notifyDataSetChanged();
 
@@ -169,49 +195,49 @@ public class GameMatch extends AppCompatActivity {
                 if (attacks[i][j] > 0 && bomb_pos[i][j] > 0) {
                     Log.d(LOG_TAG, "damage entity");
                     entity.hp--;
+                    binding.entityHP.setText(entity.hp + "");
+                    if(entity.hp == 0){
+                        winn_plr= true;
+                        startActivity(Game_Menu.getInstance(binding.getRoot().getContext()));
+                    }
                 }
             }
         }
         Log.d(LOG_TAG, "end curect atack");
     }
-private Thread getThread2() {
-    Runnable runnable = new Runnable() {
-        @Override
-        public void run() {
-            while (true) {
-                if(entity.hp == 0){
-                    startActivity(Game_Menu.getInstance(binding.getRoot().getContext()));
-                    break;}
-                binding.entityHP.setText(entity.hp + "");
-                try {
-                    Thread.sleep(700);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        }
-    };
-    return new Thread(runnable);
-}
-    private Thread getThread1() {
-        Runnable runnable = new Runnable() {
-            @Override
-           public void run() {
-                while (true) {
-                    if(hp == 0){
-                        startActivity(Game_Menu.getInstance(getApplicationContext()));
-                        break;}
-                    binding.HP.setText(hp + "");
-                    try {
-                        Thread.sleep(700);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-            }
-        };
-        return new Thread(runnable);
-    }
+//private Thread getThread2() {
+//    Runnable runnable = new Runnable() {
+//        @Override
+//        public void run() {
+//            while (true) {
+//
+//                try {
+//                    Thread.sleep(700);
+//                } catch (InterruptedException e) {
+//                    throw new RuntimeException(e);
+//                }
+//            }
+//        }
+//    };
+//    return new Thread(runnable);
+//}
+//    private Thread getThread1() {
+//        Runnable runnable = new Runnable() {
+//            @Override
+//           public void run() {
+//                while (true) {
+//
+//
+//                    try {
+//                        Thread.sleep(700);
+//                    } catch (InterruptedException e) {
+//                        throw new RuntimeException(e);
+//                    }
+//                }
+//            }
+//        };
+//        return new Thread(runnable);
+//    }
 //    private Thread getThread4() {
 //        Runnable runnable = new Runnable() {
 //            @Override
