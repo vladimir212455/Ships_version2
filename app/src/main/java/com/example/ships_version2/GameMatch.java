@@ -21,10 +21,6 @@ import java.util.ArrayList;
 import java.util.logging.Handler;
 
 public class GameMatch extends AppCompatActivity {
-    SharedPreferences settings;
-    SharedPreferences.Editor prefEditor;
-    private static final String PREF_NAME = "Name";
-    private static final String PREFS_FILE = "Account";
     private ActivityGameMatchBinding binding;
     private static final String LOG_TAG = "ActivityPlayingField";
     private Entity entity;
