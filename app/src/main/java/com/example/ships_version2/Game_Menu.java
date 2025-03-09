@@ -2,6 +2,7 @@ package com.example.ships_version2;
 
 import static com.example.ships_version2.GameMatch.winn_ent;
 import static com.example.ships_version2.GameMatch.winn_plr;
+import static com.example.ships_version2.MainActivity.intent;
 
 import android.content.Context;
 import android.content.Intent;
@@ -34,5 +35,6 @@ public class Game_Menu extends AppCompatActivity {
         {
             binding.winer.setText("NICE");
         }
+        stopService(new Intent(Game_Menu.this, Media_service.class));
     }
 }

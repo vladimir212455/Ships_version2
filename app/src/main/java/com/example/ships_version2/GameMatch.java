@@ -132,7 +132,7 @@ public class GameMatch extends AppCompatActivity {
                                                 binding.HP.setText(hp + "");
                                                 if(hp == 0){
                                                     winn_ent= true;
-                                                    startActivity(Game_Menu.getInstance(getApplicationContext()));
+                                                    startActivity(Game_Menu.getInstance(binding.getRoot().getContext()));
                                                 }
                                                 states.remove(0);
                                                 adapter.notifyDataSetChanged();
@@ -181,7 +181,7 @@ public class GameMatch extends AppCompatActivity {
                     binding.HP.setText(hp + "");
                     if(hp == 0){
                         winn_ent= true;
-                        startActivity(Game_Menu.getInstance(getApplicationContext()));
+                        startActivity(Game_Menu.getInstance(binding.getRoot().getContext()));
                     }
 
                     states.remove(0);
