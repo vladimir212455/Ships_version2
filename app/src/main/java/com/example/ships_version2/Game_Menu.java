@@ -19,6 +19,11 @@ import com.example.ships_version2.databinding.ActivityGameMenuBinding;
 
 public class Game_Menu extends AppCompatActivity {
     ActivityGameMenuBinding binding;
+    DatabaseHelper databaseHelper;
+    SQLiteDatabase db;
+    Cursor userCursor;
+    SimpleCursorAdapter userAdapter;
+
     public static Intent getInstance(Context context) {
         return new Intent(context, Game_Menu.class);
     }
