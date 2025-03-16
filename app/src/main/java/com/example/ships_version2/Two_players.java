@@ -23,6 +23,5 @@ public class Two_players extends AppCompatActivity {
         binding = ActivityTwoPlayersBinding.inflate(getLayoutInflater());
         super.onCreate(savedInstanceState);
         setContentView(binding.getRoot());
-
     }
 }

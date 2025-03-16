@@ -26,10 +26,10 @@ public class GameMatch extends AppCompatActivity {
     private Entity entity;
     private Boolean state_game = true;
     static ImageButton[][] buttons1;
-    private int hp;
-    private int hours = 0;
-    private int minutes = 0;
-    private int seconds = 0;
+    static int hp;
+    static int hours = 0;
+    static int minutes = 0;
+    static int seconds = 0;
     int at = 0;
     SensorManager sensorManager;
     Sensor sensorLight;

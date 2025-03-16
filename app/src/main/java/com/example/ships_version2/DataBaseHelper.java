@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-class DatabaseHelper extends SQLiteOpenHelper {
+class DataBaseHelper extends SQLiteOpenHelper {
     private static String DB_PATH; // полный путь к базе данных
     private static String DB_NAME = "cityinfo.db";
     private static final int SCHEMA = 1; // версия базы данных
@@ -22,7 +22,7 @@ class DatabaseHelper extends SQLiteOpenHelper {
     static final String COLUMN_YEAR = "year";
     private Context myContext;
 
-    DatabaseHelper(Context context) {
+    DataBaseHelper(Context context) {
         super(context, DB_NAME, null, SCHEMA);
         this.myContext=context;
         DB_PATH =context.getFilesDir().getPath() + DB_NAME;
