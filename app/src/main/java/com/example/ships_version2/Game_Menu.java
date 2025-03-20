@@ -1,61 +1,49 @@
 package com.example.ships_version2;
 
-import static androidx.core.content.PackageManagerCompat.LOG_TAG;
-import static com.example.ships_version2.GameMatch.hours;
-import static com.example.ships_version2.GameMatch.minutes;
-import static com.example.ships_version2.GameMatch.seconds;
 import static com.example.ships_version2.GameMatch.winn_ent;
 import static com.example.ships_version2.GameMatch.winn_plr;
-import static com.example.ships_version2.MainActivity.intent;
-
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
-
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-
-import com.example.ships_version2.databinding.ActivityGameBinding;
+import androidx.recyclerview.widget.RecyclerView;
 import com.example.ships_version2.databinding.ActivityGameMenuBinding;
-
 import java.util.ArrayList;
-import java.util.List;
 
 public class Game_Menu extends AppCompatActivity {
     ActivityGameMenuBinding binding;
-    DataBaseHelper databaseHelper;
-    SQLiteDatabase db;
-    List<user> list = new ArrayList<>();
+    ArrayList<user> list = new ArrayList<user>();
+    StateAdapter adapter;
+    RecyclerView recyclerView;
     public static Intent getInstance(Context context) {
         return new Intent(context, Game_Menu.class);
     }
+    @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         binding = ActivityGameMenuBinding.inflate(getLayoutInflater());
         super.onCreate(savedInstanceState);
         setContentView(binding.getRoot());
-        if(winn_ent)
-        {
+        if (winn_ent) {
             binding.winer.setText("YOU ARE LOOOOOSE");
         }
-        if(winn_plr)
-        {
+        if (winn_plr) {
             binding.winer.setText("NICE");
         }
         stopService(new Intent(Game_Menu.this, Media_service.class));
 try {
-    list.add(new user("1", 1, "Win"));
-    TableAdapter table = new TableAdapter();
+    recyclerView = findViewById(R.id.TableList);
+    list.add(new user("1", "2", "Win", 34324234));
+    ProductAdapter table = new ProductAdapter();
     table.setProductList(list);
-    binding.recyclerView.setAdapter(table);
-}catch (Exception e){
-        Log.d("BDes", e.getMessage().toString());
+    recyclerView.setAdapter(table);
+}catch (Exception e)
+{
+    Log.d("ActivityPlayingField", e.getMessage()) ;
+}
+
     }
 }
 //    @Override
@@ -69,4 +57,3 @@ try {
 //        userList.setAdapter(arrayAdapter);
 //        adapter.close();
 //    }
-}
