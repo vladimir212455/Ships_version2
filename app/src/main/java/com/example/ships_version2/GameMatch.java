@@ -66,7 +66,7 @@ public class GameMatch extends AppCompatActivity {
         setContentView(binding.getRoot());
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         sensorLight = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
-        hp = 4;
+        hp = 1;
         entity = new Entity(4);
         entity.Create_field();
         onClickSensLight();

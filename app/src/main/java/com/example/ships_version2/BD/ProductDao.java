@@ -1,5 +1,6 @@
 package com.example.ships_version2.BD;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -14,7 +15,7 @@ import java.util.List;
 public interface ProductDao {
 
     @Query("SELECT * FROM user_room ORDER BY name")
-    List<user> getProductList();
+    LiveData<List<user>> getProductList();
 
     @Query("SELECT * FROM user_room WHERE id IN (:productsId)")
     List<user> loadAllByIds(int[] productsId);
