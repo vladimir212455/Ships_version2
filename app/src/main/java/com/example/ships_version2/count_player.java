@@ -26,9 +26,9 @@ public class count_player extends AppCompatActivity {
         binding = ActivityCountPlayerBinding.inflate(getLayoutInflater());
         super.onCreate(savedInstanceState);
         setContentView(binding.getRoot());
-        binding.one.setOnClickListener(v ->
+        binding.two.setOnClickListener(v ->
         {
-            startActivity(GameActivity.getInstance(getApplicationContext()));
+            startActivity(Two_players.getInstance(getApplicationContext()));
         });
         binding.one.setOnClickListener(v ->
         {
