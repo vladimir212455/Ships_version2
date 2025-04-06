@@ -12,6 +12,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 
 import com.example.ships_version2.databinding.ActivityCountPlayerBinding;
 import com.example.ships_version2.databinding.ActivityGameBinding;
@@ -22,10 +26,10 @@ import java.util.concurrent.ExecutionException;
 public class Two_players extends AppCompatActivity {
     private static final String LOG_TAG = "ActivityPlayingField";
     ActivityTwoPlayersBinding binding;
-    int[][] ship_pos_1;
-    int[][] ship_pos_2;
-    int[][] bomb_pos_1;
-    int[][] bomb_pos_2;
+    static int[][] ship_pos_1;
+    static int[][] ship_pos_2;
+    static int[][] bomb_pos_1;
+    static int[][] bomb_pos_2;
     Boolean player;
     int hp_player1;
     int hp_player2;
@@ -81,17 +85,8 @@ public class Two_players extends AppCompatActivity {
                                     buttons[finalJ][finalK].setImageResource(R.drawable.bomb);
                                     i++;
                                 }
-                                if (i > 4 && i <= 6) {
-                                    ship_pos_1[finalJ][finalK]++;
-                                    Log.d(LOG_TAG, finalJ + " " + finalK);
-                                    buttons[finalJ][finalK].setImageResource(R.drawable.boat);
-                                    i++;
-                                }
-                                if (i > 6 && i <= 8) {
-                                    bomb_pos_1[finalJ][finalK]++;
-                                    Log.d(LOG_TAG, finalJ + " " + finalK);
-                                    buttons[finalJ][finalK].setImageResource(R.drawable.bomb);
-                                    i++;
+                                if (i== 5) {
+                                   replaceFragment();
                                 }
                             }
                 }
@@ -100,6 +95,18 @@ public class Two_players extends AppCompatActivity {
         }
         }catch (RuntimeException e) {
             Log.d(LOG_TAG, e.getMessage().toString());
+        }
+    }
+    private void replaceFragment() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        Fragment fragment = fragmentManager.findFragmentById(R.id.root_container);
+
+        if(fragment==null){
+            fragment = new Fragment_field();
+            fragmentManager.beginTransaction()
+                    .addToBackStack(null)
+                    .replace(R.id.root_container,fragment)
+                    .commit();
         }
     }
 }
