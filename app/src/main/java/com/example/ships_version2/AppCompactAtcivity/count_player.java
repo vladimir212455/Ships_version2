@@ -1,20 +1,12 @@
-package com.example.ships_version2;
-
-import static com.example.ships_version2.GameMatch.winn_ent;
-import static com.example.ships_version2.GameMatch.winn_plr;
+package com.example.ships_version2.AppCompactAtcivity;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.ships_version2.databinding.ActivityCountPlayerBinding;
-import com.example.ships_version2.databinding.ActivityGameMenuBinding;
 
 public class count_player extends AppCompatActivity {
     ActivityCountPlayerBinding binding;

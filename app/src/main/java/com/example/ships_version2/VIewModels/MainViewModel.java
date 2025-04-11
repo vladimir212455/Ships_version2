@@ -1,4 +1,4 @@
-package com.example.ships_version2;
+package com.example.ships_version2.VIewModels;
 
 import android.app.Application;
 
@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData;
 
 
 import com.example.ships_version2.BD.ProductDatabase;
+import com.example.ships_version2.user;
 
 import java.util.List;
 

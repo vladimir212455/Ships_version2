@@ -1,29 +1,31 @@
-package com.example.ships_version2;
+package com.example.ships_version2.AppCompactAtcivity;
 
-import static com.example.ships_version2.GameMatch.hours;
-import static com.example.ships_version2.GameMatch.minutes;
-import static com.example.ships_version2.GameMatch.seconds;
-import static com.example.ships_version2.GameMatch.winn_ent;
-import static com.example.ships_version2.GameMatch.winn_plr;
-import android.annotation.SuppressLint;
+import static com.example.ships_version2.AppCompactAtcivity.GameMatch.hours;
+import static com.example.ships_version2.AppCompactAtcivity.GameMatch.minutes;
+import static com.example.ships_version2.AppCompactAtcivity.GameMatch.seconds;
+import static com.example.ships_version2.AppCompactAtcivity.GameMatch.winn_ent;
+import static com.example.ships_version2.AppCompactAtcivity.GameMatch.winn_plr;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ships_version2.BD.ProductDatabase;
+import com.example.ships_version2.VIewModels.MainViewModel;
+import com.example.ships_version2.Adapters.ProductAdapter;
+import com.example.ships_version2.Adapters.StateAdapter;
+import com.example.ships_version2.VIewModels.AddNewProductViewModel;
 import com.example.ships_version2.databinding.ActivityGameMenuBinding;
-import java.util.ArrayList;
+import com.example.ships_version2.user;
+
 import java.util.List;
 import java.util.Random;
 
@@ -47,15 +49,18 @@ public class Game_Menu extends AppCompatActivity {
         binding = ActivityGameMenuBinding.inflate(getLayoutInflater());
         super.onCreate(savedInstanceState);
         setContentView(binding.getRoot());
+        Random random1 = new Random();
+        int p = random1.nextInt() ;
+        Log.d("Game_Menu", p + " ");
         main_viewModel = new ViewModelProvider(this).get(AddNewProductViewModel.class);
         if (winn_ent) {
             binding.winer.setText("YOU ARE LOOOOOSE");
-            user product = new user(hours +  " " + minutes + " " + seconds, "you", "LOSE", 10012);
+            user product = new user(hours +  " " + minutes + " " + seconds, "you", "LOSE", p);
             main_viewModel.saveData(product);
         }
         if (winn_plr) {
             binding.winer.setText("NICE");
-            user product = new user(hours +  " " + minutes + " " + seconds, "you", "WIN",  10201);
+            user product = new user(hours +  " " + minutes + " " + seconds, "you", "WIN",  p);
             main_viewModel.saveData(product);
         }
         try {

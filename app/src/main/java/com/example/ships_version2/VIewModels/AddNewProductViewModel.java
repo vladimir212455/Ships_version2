@@ -1,7 +1,6 @@
-package com.example.ships_version2;
+package com.example.ships_version2.VIewModels;
 
 import android.app.Application;
-import android.os.IBinder;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -9,6 +8,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.ships_version2.BD.ProductDatabase;
+import com.example.ships_version2.user;
 
 
 public class AddNewProductViewModel extends AndroidViewModel {

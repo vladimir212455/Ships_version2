@@ -1,24 +1,26 @@
-package com.example.ships_version2;
-import static com.example.ships_version2.GameActivity.bomb_pos;
-import static com.example.ships_version2.GameActivity.ship_pos;
+package com.example.ships_version2.AppCompactAtcivity;
+import static com.example.ships_version2.AppCompactAtcivity.GameActivity.bomb_pos;
+import static com.example.ships_version2.AppCompactAtcivity.GameActivity.ship_pos;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.ships_version2.R;
+import com.example.ships_version2.Adapters.StateAdapter;
 import com.example.ships_version2.databinding.ActivityGameMatchBinding;
+import com.example.ships_version2.structures.Entity;
+import com.example.ships_version2.structures.state;
+
 import java.util.ArrayList;
-import java.util.logging.Handler;
 
 public class GameMatch extends AppCompatActivity {
     private ActivityGameMatchBinding binding;
@@ -36,8 +38,8 @@ public class GameMatch extends AppCompatActivity {
     ArrayList<state> states = new ArrayList<state>();
     StateAdapter adapter;
     RecyclerView recyclerView;
-    static boolean winn_ent;
-    static boolean winn_plr;
+    public static boolean winn_ent;
+    public static boolean winn_plr;
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);

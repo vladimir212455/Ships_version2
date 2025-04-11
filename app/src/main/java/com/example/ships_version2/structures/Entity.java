@@ -1,6 +1,5 @@
-package com.example.ships_version2;
+package com.example.ships_version2.structures;
 
-import android.nfc.Tag;
 import android.util.Log;
 
 import java.util.Random;
@@ -38,7 +37,7 @@ public class Entity {
         return ship_pos;
     }
 
-    void Create_field() {
+    public void Create_field() {
         Random random = new Random();
         for (int i = 0; i < size; i++) {
             int k = random.nextInt(size);
@@ -58,7 +57,7 @@ public class Entity {
         }
     }
 
-    int[][] Atack_rand() {
+    public int[][] Atack_rand() {
         Random random = new Random();
         int[][] res = new int[size][size];
         for (int i = 0; i < size; i++) {

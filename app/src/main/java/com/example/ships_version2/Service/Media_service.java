@@ -1,13 +1,17 @@
-package com.example.ships_version2;
+package com.example.ships_version2.Service;
 
-import static com.example.ships_version2.GameMatch.winn_ent;
-import static com.example.ships_version2.GameMatch.winn_plr;
+
+
+import static com.example.ships_version2.AppCompactAtcivity.GameMatch.winn_ent;
+import static com.example.ships_version2.AppCompactAtcivity.GameMatch.winn_plr;
 
 import android.app.Service;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.IBinder;
 import android.util.Log;
+
+import com.example.ships_version2.R;
 
 public class Media_service extends Service {
     MediaPlayer ambientMediaPlayer;

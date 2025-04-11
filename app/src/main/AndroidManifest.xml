@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -12,35 +13,42 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Ships_version2"
         tools:targetApi="31">
-        <service
-            android:name=".Media_service"
-            android:enabled="true"
-            android:exported="true"></service>
 
         <activity
-            android:name=".Two_players"
+            android:name=".AppCompactAtcivity.RegisterActivity"
+            android:exported="false"
+            android:label="@string/title_activity_register"
+            android:theme="@style/Theme.Ships_version2" />
+
+        <service
+            android:name=".Service.Media_service"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity
+            android:name=".AppCompactAtcivity.Two_players"
             android:exported="false" />
         <activity
-            android:name=".count_player"
+            android:name=".AppCompactAtcivity.count_player"
             android:exported="false"
             android:label="@string/title_activity_count_player"
             android:theme="@style/Theme.Ships_version2" />
+<!--        <activity-->
+<!--            android:name=".MainActivity2"-->
+<!--            android:exported="false"-->
+<!--            android:label="@string/title_activity_main2"-->
+<!--            android:theme="@style/Theme.Ships_version2" />-->
         <activity
-            android:name=".MainActivity2"
-            android:exported="false"
-            android:label="@string/title_activity_main2"
-            android:theme="@style/Theme.Ships_version2" />
-        <activity
-            android:name=".Game_Menu"
+            android:name=".AppCompactAtcivity.Game_Menu"
             android:exported="false" />
         <activity
-            android:name=".GameMatch"
+            android:name=".AppCompactAtcivity.GameMatch"
             android:exported="false" />
         <activity
-            android:name=".GameActivity"
+            android:name=".AppCompactAtcivity.GameActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".AppCompactAtcivity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

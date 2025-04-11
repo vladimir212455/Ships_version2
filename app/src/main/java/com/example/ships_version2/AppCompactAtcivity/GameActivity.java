@@ -1,21 +1,15 @@
-package com.example.ships_version2;
+package com.example.ships_version2.AppCompactAtcivity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 
-import androidx.activity.EdgeToEdge;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
+import com.example.ships_version2.R;
 import com.example.ships_version2.databinding.ActivityGameBinding;
 
 public class GameActivity extends AppCompatActivity {

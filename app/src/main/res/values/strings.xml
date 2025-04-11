@@ -2,4 +2,5 @@
     <string name="app_name">Ships_version2</string>
     <string name="title_activity_main2">MainActivity2</string>
     <string name="title_activity_count_player">count_player</string>
+    <string name="title_activity_register">RegisterActivity</string>
 </resources>

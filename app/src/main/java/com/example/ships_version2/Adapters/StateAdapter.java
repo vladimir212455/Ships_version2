@@ -1,13 +1,14 @@
-package com.example.ships_version2;
+package com.example.ships_version2.Adapters;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.ships_version2.R;
+import com.example.ships_version2.structures.state;
 
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class StateAdapter  extends RecyclerView.Adapter<StateAdapter.ViewHolder>
     private final LayoutInflater inflater;
     private final List<state> states;
 
-    StateAdapter(Context context, List<state> states) {
+    public StateAdapter(Context context, List<state> states) {
         this.states = states;
         this.inflater = LayoutInflater.from(context);
     }

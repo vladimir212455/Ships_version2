@@ -1,4 +1,4 @@
-package com.example.ships_version2;
+package com.example.ships_version2.AppCompactAtcivity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,8 +9,8 @@ import android.os.Looper;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
+import com.example.ships_version2.VIewModels.AddNewProductViewModel;
 import com.example.ships_version2.databinding.ActivityGameMenuBinding;
 
 

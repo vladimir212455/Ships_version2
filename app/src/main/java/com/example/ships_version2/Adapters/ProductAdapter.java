@@ -1,4 +1,4 @@
-package com.example.ships_version2;
+package com.example.ships_version2.Adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +22,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         notifyDataSetChanged();
     }
 
-    interface OnItemProductClickListener {
+    public interface OnItemProductClickListener {
         void onProductClick(int position);
     }
 
