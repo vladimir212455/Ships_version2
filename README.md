@@ -5,4 +5,4 @@ Samsung Innovation Campus Defense Project
 
 
 
-!The project contains the implementation of the game sea battle
+The project contains the implementation of the game sea battle
