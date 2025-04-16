@@ -4,28 +4,29 @@ package com.example.ships_version2.fragments;
 import static android.content.Context.MODE_PRIVATE;
 import static com.example.ships_version2.AppCompactAtcivity.Two_players.bomb_pos_1;
 import static com.example.ships_version2.AppCompactAtcivity.Two_players.i;
+import static com.example.ships_version2.AppCompactAtcivity.Two_players.i2;
 import static com.example.ships_version2.AppCompactAtcivity.Two_players.ship_pos_1;
-import static java.lang.Thread.sleep;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import android.util.Log;
+
 import com.example.ships_version2.R;
-import com.example.ships_version2.AppCompactAtcivity.Two_players;
 import com.example.ships_version2.databinding.FragmentFieldBinding;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+
 import java.util.HashMap;
 
-public class Fragment_field extends Fragment {
+public class Fragment_field2 extends Fragment {
     private final static String LOG_TAG = "ContentFragment";
     private final static String BOMB= "bomb";
     private static final String SHIP = "ship";
@@ -36,11 +37,11 @@ public class Fragment_field extends Fragment {
     private FragmentFieldBinding binding;
     Gson gson;
     private ImageButton[][] buttons;
-    public Fragment_field(){
+    public Fragment_field2(){
         super(R.layout.fragment_field_);
         ship_pos_1 =  new int[4][4];
         bomb_pos_1 =  new int[4][4];
-        i  = 0;
+        i2 = 0;
         Log.d(LOG_TAG, "Constructor");
     }
 
@@ -86,37 +87,37 @@ public class Fragment_field extends Fragment {
                     @Override
                     public void onClick(View v) {
                         if (!buttons[finalJ][finalK].isActivated()) {
-                            if (i <= 2) {
+                            if (i2 <= 2) {
                                 ship_pos_1[finalJ][finalK]++;
                                 Log.d(LOG_TAG, finalJ + " " + finalK);
                                 buttons[finalJ][finalK].setImageResource(R.drawable.boat);
-                                i++;
+                                i2++;
                             }
-                            if (i <= 4 && i > 2) {
+                            if (i2 <= 4 && i2 > 2) {
                                 bomb_pos_1[finalJ][finalK]++;
                                 Log.d(LOG_TAG, finalJ + " " + finalK);
                                 buttons[finalJ][finalK].setImageResource(R.drawable.bomb);
-                                i++;
+                                i2++;
                             }
 
-                            if (i == 5)
+                            if (i2 == 5)
                             {
                                 for (int j1 = 0; j1 < 4; j1++) {
                                     for (int k1 = 0; k1 < 4; k1++) {
                                         buttons[j1][k1].setImageResource(0);
                                     }
                                 }
-                                i++;
+                                i2++;
                             }
                         }
                     }
                 });
-                if (i == 6)
+                if (i2 == 6)
                 {
                     break;
                 }
             }
-            if (i == 6)
+            if (i2 == 6)
             {
                 break;
             }

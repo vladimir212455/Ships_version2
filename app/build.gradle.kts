@@ -50,6 +50,8 @@ android {
 }
 
 dependencies {
+
+    implementation ("com.google.code.gson:gson:2.8.6")
     implementation(platform("com.google.firebase:firebase-bom:33.12.0"))
     implementation("com.google.firebase:firebase-auth")
     implementation(libs.lifecycle.runtime.ktx)

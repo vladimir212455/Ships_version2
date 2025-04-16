@@ -20,7 +20,7 @@ public class count_player extends AppCompatActivity {
         setContentView(binding.getRoot());
         binding.two.setOnClickListener(v ->
         {
-            startActivity(Two_players.getInstance(getApplicationContext()));
+            startActivity(Two_players.getInstance(getApplication()));
         });
         binding.one.setOnClickListener(v ->
         {
