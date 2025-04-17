@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.ships_version2.Adapters.AuthManager;
 import com.example.ships_version2.Service.Media_service;
 import com.example.ships_version2.databinding.ActivityMainBinding;
 
@@ -18,10 +19,13 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         super.onCreate(savedInstanceState);
         setContentView(binding.getRoot());
+        AuthManager authManager = new AuthManager(this);
         binding.play.setOnClickListener(view-> {
-            intent = new Intent(this, Media_service.class);
-            startService(intent);
-            startActivity(count_player.getInstance(getApplicationContext()));
+            authManager.logoutUser();
+            Intent intent = new Intent(MainActivity.this, AuthorizationActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
         });
 
     }

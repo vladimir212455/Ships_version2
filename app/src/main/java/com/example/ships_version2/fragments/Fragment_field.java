@@ -118,30 +118,30 @@ public class Fragment_field extends Fragment {
             }
             if (i == 6)
             {
+                match();
                 break;
             }
         }
-//        Thread thread = new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                while (i != 6)
-//                {
-//                    try {
-//                        Thread.sleep(1000);
-//                        if (i == 5) {
-//                            fi();
-//                        }
-//                    } catch (InterruptedException e) {
-//                        throw new RuntimeException(e);
-//                    }
-//                }
-//            }
-//        });
-//        thread.start();
+
 
         Log.d(LOG_TAG, "onViewCreated");
     }
+    void match()
+    {
+        for (int j = 0; j < 4; j++) {
+            for (int k = 0; k < 4; k++) {
+                int finalK = j;
+                int finalJ = k;
+                buttons[finalJ][finalK].setOnClickListener(new View.OnClickListener() {
 
+                    @Override
+                    public void onClick(View view) {
+
+                    }
+                });
+            }
+        }
+    }
     @Override
     public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
         super.onViewStateRestored(savedInstanceState);
@@ -157,7 +157,6 @@ public class Fragment_field extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-      //  getHash();
         Log.d(LOG_TAG, "onResume");
     }
 
@@ -170,7 +169,6 @@ public class Fragment_field extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
-       // setHash();
         Log.d(LOG_TAG, "onStop");
     }
 

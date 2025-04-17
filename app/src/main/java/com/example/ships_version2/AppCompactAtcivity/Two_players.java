@@ -70,6 +70,15 @@ public class Two_players extends AppCompatActivity {
         Log.d(LOG_TAG, "onResume");
     }
 
+
+    
+    void Attack(int[][] bomb, int[][] ship_ent)
+    {
+
+
+    }
+
+
     @Override
     public void onPause() {
         super.onPause();
