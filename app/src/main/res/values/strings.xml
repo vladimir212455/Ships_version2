@@ -3,4 +3,7 @@
     <string name="title_activity_main2">MainActivity2</string>
     <string name="title_activity_count_player">count_player</string>
     <string name="title_activity_register">RegisterActivity</string>
+    <string name="ver_1_0">ver: 1.0</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>
