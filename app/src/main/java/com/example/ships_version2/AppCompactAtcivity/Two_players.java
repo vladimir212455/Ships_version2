@@ -32,6 +32,7 @@ public class Two_players extends AppCompatActivity {
     public static  int[][] ship_pos_2;
     public static  int[][] bomb_pos_1;
     public static  int[][] bomb_pos_2;
+    public static int mutex;
 
     Boolean player;
     int hp_player1;
@@ -61,7 +62,7 @@ public class Two_players extends AppCompatActivity {
         i = 0;
         i2 = 0;
         Log.d(LOG_TAG, "ctor");
-
+        mutex = 1;
     }
     @Override
     public void onResume() {
@@ -114,6 +115,9 @@ public class Two_players extends AppCompatActivity {
             Log.d(LOG_TAG, "create i");
             replaceFragment();
             replaceFragment2();
+            binding.hpFirst.setText("4");
+            binding.hpSecond.setText("4");
+
 //        for (int j = 0; j < 4; j++) {
 //            for (int k = 0; k < 4; k++) {
 //                int finalK = j;

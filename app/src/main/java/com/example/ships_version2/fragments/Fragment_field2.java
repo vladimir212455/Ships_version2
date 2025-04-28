@@ -5,6 +5,7 @@ import static android.content.Context.MODE_PRIVATE;
 import static com.example.ships_version2.AppCompactAtcivity.Two_players.bomb_pos_1;
 import static com.example.ships_version2.AppCompactAtcivity.Two_players.i;
 import static com.example.ships_version2.AppCompactAtcivity.Two_players.i2;
+import static com.example.ships_version2.AppCompactAtcivity.Two_players.mutex;
 import static com.example.ships_version2.AppCompactAtcivity.Two_players.ship_pos_1;
 
 import android.content.Context;
@@ -87,20 +88,20 @@ public class Fragment_field2 extends Fragment {
                     @Override
                     public void onClick(View v) {
                         if (!buttons[finalJ][finalK].isActivated()) {
-                            if (i2 <= 2) {
+                            if (i2 <= 2 && mutex == 2) {
                                 ship_pos_1[finalJ][finalK]++;
                                 Log.d(LOG_TAG, finalJ + " " + finalK);
                                 buttons[finalJ][finalK].setImageResource(R.drawable.boat);
                                 i2++;
                             }
-                            if (i2 <= 4 && i2 > 2) {
+                            if (i2 <= 4 && i2 > 2 && mutex == 2) {
                                 bomb_pos_1[finalJ][finalK]++;
                                 Log.d(LOG_TAG, finalJ + " " + finalK);
                                 buttons[finalJ][finalK].setImageResource(R.drawable.bomb);
                                 i2++;
                             }
 
-                            if (i2 == 5)
+                            if (i2 == 5 && mutex == 2)
                             {
                                 for (int j1 = 0; j1 < 4; j1++) {
                                     for (int k1 = 0; k1 < 4; k1++) {
@@ -108,23 +109,35 @@ public class Fragment_field2 extends Fragment {
                                     }
                                 }
                                 i2++;
+                                mutex = 2;
+                                Log.d(LOG_TAG, "mutex 1");
                             }
                         }
                     }
                 });
-                if (i2 == 6)
-                {
-                    break;
-                }
+
             }
-            if (i == 6)
-            {
-                match();
-                break;
-            }
+
         }
-
-
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true)
+                {
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    if (i2 == 6 && mutex == 2)
+                {
+                    Log.d(LOG_TAG, "start match");
+                    match();
+                    break;
+                }}
+            }
+        });
+        thread.start();
         Log.d(LOG_TAG, "onViewCreated");
     }
     void match()
@@ -133,11 +146,12 @@ public class Fragment_field2 extends Fragment {
             for (int k = 0; k < 4; k++) {
                 int finalK = j;
                 int finalJ = k;
-                buttons[finalJ][finalK].setOnClickListener(new View.OnClickListener() {
+                buttons[finalK][finalJ].setOnClickListener(new View.OnClickListener() {
 
                     @Override
                     public void onClick(View view) {
-
+                        if (mutex == 2)
+                            buttons[finalK][finalJ].setImageResource(R.drawable.img);
                     }
                 });
             }
