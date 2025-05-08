@@ -3,10 +3,15 @@ package com.example.ships_version2.fragments;
 
 import static android.content.Context.MODE_PRIVATE;
 import static com.example.ships_version2.AppCompactAtcivity.Two_players.bomb_pos_1;
+import static com.example.ships_version2.AppCompactAtcivity.Two_players.bomb_pos_2;
+import static com.example.ships_version2.AppCompactAtcivity.Two_players.hp_player1;
+import static com.example.ships_version2.AppCompactAtcivity.Two_players.hp_player2;
 import static com.example.ships_version2.AppCompactAtcivity.Two_players.i;
 import static com.example.ships_version2.AppCompactAtcivity.Two_players.i2;
 import static com.example.ships_version2.AppCompactAtcivity.Two_players.mutex;
 import static com.example.ships_version2.AppCompactAtcivity.Two_players.ship_pos_1;
+import static com.example.ships_version2.AppCompactAtcivity.Two_players.ship_pos_2;
+
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -21,6 +26,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.ships_version2.AppCompactAtcivity.Two_players;
 import com.example.ships_version2.R;
 import com.example.ships_version2.databinding.FragmentFieldBinding;
 import com.google.gson.Gson;
@@ -89,13 +95,13 @@ public class Fragment_field2 extends Fragment {
                     public void onClick(View v) {
                         if (!buttons[finalJ][finalK].isActivated()) {
                             if (i2 <= 2 && mutex == 2) {
-                                ship_pos_1[finalJ][finalK]++;
+                                ship_pos_2[finalJ][finalK]++;
                                 Log.d(LOG_TAG, finalJ + " " + finalK);
                                 buttons[finalJ][finalK].setImageResource(R.drawable.boat);
                                 i2++;
                             }
                             if (i2 <= 4 && i2 > 2 && mutex == 2) {
-                                bomb_pos_1[finalJ][finalK]++;
+                                bomb_pos_2[finalJ][finalK]++;
                                 Log.d(LOG_TAG, finalJ + " " + finalK);
                                 buttons[finalJ][finalK].setImageResource(R.drawable.bomb);
                                 i2++;
@@ -150,8 +156,17 @@ public class Fragment_field2 extends Fragment {
 
                     @Override
                     public void onClick(View view) {
-                        if (mutex == 2)
+                        if (mutex == 2) {
                             buttons[finalK][finalJ].setImageResource(R.drawable.img);
+                            if(ship_pos_1[finalK][finalJ] > 0){
+                                hp_player2--;
+                            Log.d(LOG_TAG, hp_player2 + "hp player 2");}
+
+                            if(bomb_pos_1[finalK][finalJ] > 0){
+                                hp_player1--;
+                                Log.d(LOG_TAG, hp_player1 + "hp player 1");}
+                            mutex = 1;
+                        }
                     }
                 });
             }

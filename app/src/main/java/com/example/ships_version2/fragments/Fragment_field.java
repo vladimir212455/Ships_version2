@@ -3,10 +3,15 @@ package com.example.ships_version2.fragments;
 
 import static android.content.Context.MODE_PRIVATE;
 import static com.example.ships_version2.AppCompactAtcivity.Two_players.bomb_pos_1;
+import static com.example.ships_version2.AppCompactAtcivity.Two_players.bomb_pos_2;
+import static com.example.ships_version2.AppCompactAtcivity.Two_players.hp_player2;
+import static com.example.ships_version2.AppCompactAtcivity.Two_players.hp_player1;
+
 import static com.example.ships_version2.AppCompactAtcivity.Two_players.i;
 import static com.example.ships_version2.AppCompactAtcivity.Two_players.i2;
 import static com.example.ships_version2.AppCompactAtcivity.Two_players.mutex;
 import static com.example.ships_version2.AppCompactAtcivity.Two_players.ship_pos_1;
+import static com.example.ships_version2.AppCompactAtcivity.Two_players.ship_pos_2;
 import static java.lang.Thread.sleep;
 
 import android.content.Context;
@@ -147,11 +152,19 @@ public class Fragment_field extends Fragment {
                 int finalK = j;
                 int finalJ = k;
                 buttons[finalK][finalJ].setOnClickListener(new View.OnClickListener() {
-
                     @Override
                     public void onClick(View view) {
-                        if (mutex == 1)
-                            buttons[finalJ][finalK].setImageResource(R.drawable.img);
+                        if (mutex == 1) {
+                            buttons[finalK][finalJ].setImageResource(R.drawable.img);
+                            if(ship_pos_2[finalJ][finalJ] > 0){
+                                hp_player2--;
+                            Log.d(LOG_TAG, hp_player2 + "hp player 2");}
+
+                            if(bomb_pos_2[finalK][finalJ] > 0){
+                                hp_player1--;
+                            Log.d(LOG_TAG, hp_player1 + "hp player 1");}
+                            mutex = 2;
+                        }
                     }
                 });
             }
@@ -162,7 +175,6 @@ public class Fragment_field extends Fragment {
         super.onViewStateRestored(savedInstanceState);
         Log.d(LOG_TAG, "onViewStateRestored");
     }
-
     @Override
     public void onStart() {
         super.onStart();

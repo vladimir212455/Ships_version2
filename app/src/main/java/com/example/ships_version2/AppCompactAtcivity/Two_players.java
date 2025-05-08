@@ -33,10 +33,8 @@ public class Two_players extends AppCompatActivity {
     public static  int[][] bomb_pos_1;
     public static  int[][] bomb_pos_2;
     public static int mutex;
-
-    Boolean player;
-    int hp_player1;
-    int hp_player2;
+    public static int hp_player1;
+    public static int hp_player2;
     static public  int i;
     static public  int i2;
     private SharedPreferences sharedPreferences;
@@ -70,15 +68,6 @@ public class Two_players extends AppCompatActivity {
 //        getHash();
         Log.d(LOG_TAG, "onResume");
     }
-
-
-    
-    void Attack(int[][] bomb, int[][] ship_ent)
-    {
-
-
-    }
-
 
     @Override
     public void onPause() {
@@ -117,7 +106,33 @@ public class Two_players extends AppCompatActivity {
             replaceFragment2();
             binding.hpFirst.setText("4");
             binding.hpSecond.setText("4");
+            Thread thread1 = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    while(true)
+                    {
 
+                        binding.hpFirst.post(new Runnable() {
+                            public void run() {
+                                binding.hpFirst.setText(hp_player1 + " ");
+                            }
+                        });
+                        binding.hpSecond.post(new Runnable() {
+                            public void run() {
+                                binding.hpSecond.setText(hp_player2 + " ");
+                            }
+                        });
+
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+
+                    }
+                }
+            });
+            thread1.start();
 //        for (int j = 0; j < 4; j++) {
 //            for (int k = 0; k < 4; k++) {
 //                int finalK = j;
