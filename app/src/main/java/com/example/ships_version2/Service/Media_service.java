@@ -17,7 +17,6 @@ public class Media_service extends Service {
     MediaPlayer ambientMediaPlayer;
     @Override
     public IBinder onBind(Intent intent) {
-
         throw new UnsupportedOperationException("Not yet implemented");
     }
     @Override

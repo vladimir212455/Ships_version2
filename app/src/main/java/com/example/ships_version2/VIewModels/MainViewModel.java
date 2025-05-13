@@ -7,17 +7,17 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 
-import com.example.ships_version2.BD.ProductDatabase;
+import com.example.ships_version2.BD.PlayersDatabase;
 import com.example.ships_version2.user;
 
 import java.util.List;
 
 public class MainViewModel extends AndroidViewModel {
-    private ProductDatabase repository;
+    private PlayersDatabase repository;
 
     public MainViewModel(@NonNull Application application) {
         super(application);
-        repository = ProductDatabase.newInstance(application);
+        repository = PlayersDatabase.newInstance(application);
 
     }
 

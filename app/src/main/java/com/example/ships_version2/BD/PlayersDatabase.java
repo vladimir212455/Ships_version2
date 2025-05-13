@@ -11,13 +11,13 @@ import com.example.ships_version2.user;
 
 
 @Database(entities = {user.class}, version = 1)
-public abstract class ProductDatabase extends RoomDatabase {
-    private static ProductDatabase instance = null;
+public abstract class PlayersDatabase extends RoomDatabase {
+    private static PlayersDatabase instance = null;
     private static final String DATABASE_NAME ="room_database.db";
-    public static ProductDatabase newInstance(Application application){
+    public static PlayersDatabase newInstance(Application application){
         if (instance==null){
             instance = Room.databaseBuilder(application,
-                    ProductDatabase.class,
+                    PlayersDatabase.class,
                     DATABASE_NAME).allowMainThreadQueries().build();
         }
         return instance;
