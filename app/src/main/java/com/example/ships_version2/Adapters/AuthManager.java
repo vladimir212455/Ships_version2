@@ -94,7 +94,6 @@ public class AuthManager {
             Log.e(TAG, "Failed to hash password during registration.");
             return false;
         }
-
         User_authorization newUser = new User_authorization(username, passwordHash);
         users.add(newUser);
         saveUsers(users);

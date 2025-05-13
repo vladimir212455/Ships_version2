@@ -12,10 +12,10 @@ import com.example.ships_version2.user;
 import java.util.List;
 
 @Dao
-public interface ProductDao {
+public interface PlayersDao {
 
     @Query("SELECT * FROM user_room ORDER BY name")
-    LiveData<List<user>> getProductList();
+    LiveData<List<user>> getPlayerList();
 
     @Query("SELECT * FROM user_room WHERE id IN (:productsId)")
     List<user> loadAllByIds(int[] productsId);

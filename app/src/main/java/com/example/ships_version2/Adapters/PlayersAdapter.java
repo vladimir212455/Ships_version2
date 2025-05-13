@@ -14,24 +14,20 @@ import com.example.ships_version2.user;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
-    private List<user> productList = new ArrayList<>();
+public class PlayersAdapter extends RecyclerView.Adapter<PlayersAdapter.ProductViewHolder> {
+    private List<user> players = new ArrayList<>();
 
     public void setProductList(List<user> productList) {
-        this.productList = productList;
+        this.players = productList;
         notifyDataSetChanged();
     }
-
     public interface OnItemProductClickListener {
         void onProductClick(int position);
     }
-
     private OnItemProductClickListener onItemProductClickListener;
     public void setOnItemProductClickListener(OnItemProductClickListener onItemProductClickListener){
         this.onItemProductClickListener = onItemProductClickListener;
     }
-
-
     @NonNull
     @Override
     public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -40,51 +36,27 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
         return new ProductViewHolder(UserBinding.bind(view));
     }
-
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
-        user product = productList.get(position);
-
-        holder.binding.times.setText(product.getTime());
-        holder.binding.names.setText(product.getName());
-        holder.binding.resMatch.setText(product.getResult());
+        user player = players.get(position);
+        holder.binding.times.setText(player.getTime());
+        holder.binding.names.setText(player.getName());
+        holder.binding.resMatch.setText(player.getResult());
         holder.binding.getRoot().setOnClickListener(v->{
             if (onItemProductClickListener !=null) {
                 onItemProductClickListener.onProductClick(position);
             }
         });
-
-
-       /* holder.binding.getRoot().setOnClickListener(v -> {
-            new AlertDialog.Builder(v.getContext())
-                    .setTitle("Удалить элемент")
-                    .setMessage("Удалить элемент?")
-                    .setPositiveButton("YES", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            productList.remove(productList.get(position));
-                            notifyDataSetChanged();
-                        }
-                    })
-                    .setNegativeButton(android.R.string.no, null)
-                    .setIcon(android.R.drawable.ic_delete)
-                    .show();
-
-        });*/
-
     }
     public user getItem(int position){
-        return  productList.get(position);
+        return  players.get(position);
     }
-
     @Override
     public int getItemCount() {
-        return productList.size();
+        return players.size();
     }
-
     static class ProductViewHolder extends RecyclerView.ViewHolder {
         UserBinding binding;
-
         public ProductViewHolder(@NonNull UserBinding b) {
             super(b.getRoot());
             binding = b;

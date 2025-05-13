@@ -14,7 +14,6 @@ import com.example.ships_version2.user;
 public abstract class ProductDatabase extends RoomDatabase {
     private static ProductDatabase instance = null;
     private static final String DATABASE_NAME ="room_database.db";
-
     public static ProductDatabase newInstance(Application application){
         if (instance==null){
             instance = Room.databaseBuilder(application,
@@ -23,5 +22,5 @@ public abstract class ProductDatabase extends RoomDatabase {
         }
         return instance;
     }
-    public abstract ProductDao productDao();
+    public abstract PlayersDao productDao();
 }

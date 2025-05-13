@@ -34,14 +34,7 @@ import java.util.HashMap;
 
 public class Fragment_field extends Fragment {
     private final static String LOG_TAG = "ContentFragment";
-    private final static String BOMB= "bomb";
-    private static final String SHIP = "ship";
-    private static final String FILE_NAME = "data.json";
-    HashMap<String, int[][]> input_hash;
-    HashMap<String, int[][]> output_hash;
-    private SharedPreferences sharedPreferences;
     private FragmentFieldBinding binding;
-    Gson gson;
     private ImageButton[][] buttons;
     public Fragment_field(){
         super(R.layout.fragment_field_);
@@ -50,19 +43,16 @@ public class Fragment_field extends Fragment {
         i  = 0;
         Log.d(LOG_TAG, "Constructor");
     }
-
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         Log.d(LOG_TAG, "onAttach");
     }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(LOG_TAG, "onCreate");
     }
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -71,14 +61,10 @@ public class Fragment_field extends Fragment {
         binding = FragmentFieldBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
-
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("PreferencesName", MODE_PRIVATE);
-
         buttons = new ImageButton[][]{
                 {binding.button00, binding.button01, binding.button02, binding.button03},
                 {binding.button10, binding.button11, binding.button12, binding.button13},
@@ -105,7 +91,6 @@ public class Fragment_field extends Fragment {
                                 buttons[finalJ][finalK].setImageResource(R.drawable.bomb);
                                 i++;
                             }
-
                             if (i == 5 && mutex == 1)
                             {
                                 for (int j1 = 0; j1 < 4; j1++) {
@@ -121,9 +106,7 @@ public class Fragment_field extends Fragment {
                     }
                 });
             }
-
         }
-
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -216,37 +199,4 @@ public class Fragment_field extends Fragment {
         super.onDetach();
         Log.d(LOG_TAG, "onDetach");
     }
-
-
-//    public void getHash() {
-//            Log.d(LOG_TAG, "getting");
-//            String storedHashMapString = sharedPreferences.getString("hashString", "oopsDintWork");
-//            java.lang.reflect.Type type = new TypeToken<HashMap<String,  int[][]>>(){}.getType();
-//            output_hash = gson.fromJson(storedHashMapString, type);
-//            ship_pos_1 = output_hash.get(SHIP);
-//            bomb_pos_1 = output_hash.get(BOMB);
-//
-//    }
-//
-//    private void setHash()
-//    {
-//        input_hash = new HashMap<>();
-//        input_hash.put(SHIP, ship_pos_1);
-//        input_hash.put(BOMB, bomb_pos_1);
-//        gson = new Gson();
-//        String hashMapString = gson.toJson(input_hash);
-//        sharedPreferences.edit().putString("hashString", hashMapString).apply();
-//    }
-//    private void setNullable()
-//    {
-//        input_hash = new HashMap<>();
-//        ship_pos_1 =  new int[4][4];
-//        bomb_pos_1 =  new int[4][4];
-//        input_hash.put(SHIP, ship_pos_1);
-//        input_hash.put(BOMB, bomb_pos_1);
-//        gson = new Gson();
-//        String hashMapString = gson.toJson(input_hash);
-//        sharedPreferences.edit().putString("hashString", hashMapString).apply();
-//    }
-
 }

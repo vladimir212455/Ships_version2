@@ -18,10 +18,8 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.ships_version2.BD.ProductDatabase;
+import com.example.ships_version2.Adapters.PlayersAdapter;
 import com.example.ships_version2.VIewModels.MainViewModel;
-import com.example.ships_version2.Adapters.ProductAdapter;
-import com.example.ships_version2.Adapters.StateAdapter;
 import com.example.ships_version2.VIewModels.AddNewProductViewModel;
 import com.example.ships_version2.databinding.ActivityGameMenuBinding;
 import com.example.ships_version2.user;
@@ -31,19 +29,12 @@ import java.util.Random;
 
 public class Game_Menu extends AppCompatActivity {
     ActivityGameMenuBinding binding;
-    StateAdapter adapter;
-    RecyclerView recyclerView;
-    private ProductDatabase repository;
     private AddNewProductViewModel main_viewModel;
     private MainViewModel viewModel;
-    private Boolean close = false;
-    private ProductAdapter arrayAdapter;
-    private Random random;
-
+    private PlayersAdapter arrayAdapter;
     public static Intent getInstance(Context context) {
         return new Intent(context, Game_Menu.class);
     }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         binding = ActivityGameMenuBinding.inflate(getLayoutInflater());
@@ -65,7 +56,7 @@ public class Game_Menu extends AppCompatActivity {
         }
         try {
             viewModel = new ViewModelProvider(this).get(MainViewModel.class);
-            arrayAdapter = new ProductAdapter();
+            arrayAdapter = new PlayersAdapter();
             viewModel.getProducts().observe(this, new Observer<List<user>>() {
                 @Override
                 public void onChanged(List<user> products) {
@@ -78,7 +69,6 @@ public class Game_Menu extends AppCompatActivity {
         {
             Log.d("Array", e.getMessage().toString());
         }
-
     }
     void touch()
     {
@@ -101,10 +91,9 @@ public class Game_Menu extends AppCompatActivity {
                     }
                 });
         itemTouchHelper.attachToRecyclerView(binding.TableList);
-        arrayAdapter.setOnItemProductClickListener(new ProductAdapter.OnItemProductClickListener() {
+        arrayAdapter.setOnItemProductClickListener(new PlayersAdapter.OnItemProductClickListener() {
             @Override
             public void onProductClick(int position) {}
         });
-
     }
 }

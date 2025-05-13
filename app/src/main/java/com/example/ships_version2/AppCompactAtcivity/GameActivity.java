@@ -65,7 +65,6 @@ public class GameActivity extends AppCompatActivity {
                 Log.d(LOG_TAG, "Click");
             }
         }
-
         Log.d(LOG_TAG, "end");
     }
 }

@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
                         .commit();
             }
         });
-
         binding.play.setOnClickListener(view-> {
             if (sound) {
                 startService(new Intent(this, Media_service.class));
@@ -48,7 +47,4 @@ public class MainActivity extends AppCompatActivity {
             finish();
         });
     }
-
-
-
 }

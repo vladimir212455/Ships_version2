@@ -13,10 +13,8 @@ import com.example.ships_version2.structures.state;
 import java.util.List;
 
 public class StateAdapter  extends RecyclerView.Adapter<StateAdapter.ViewHolder>{
-
     private final LayoutInflater inflater;
     private final List<state> states;
-
     public StateAdapter(Context context, List<state> states) {
         this.states = states;
         this.inflater = LayoutInflater.from(context);
@@ -26,13 +24,11 @@ public class StateAdapter  extends RecyclerView.Adapter<StateAdapter.ViewHolder>
         View view = inflater.inflate(R.layout.hp, parent, false);
         return new ViewHolder(view);
     }
-
     @Override
     public void onBindViewHolder(StateAdapter.ViewHolder holder, int position) {
         state state = states.get(position);
         holder.flagView.setBackgroundResource(R.drawable.img_1);
     }
-
     @Override
     public int getItemCount() {
         return states.size();
@@ -42,7 +38,6 @@ public class StateAdapter  extends RecyclerView.Adapter<StateAdapter.ViewHolder>
         datas.addAll(datas);
         notifyDataSetChanged();
     }
-
     public static class ViewHolder extends RecyclerView.ViewHolder {
         final View flagView;
         ViewHolder(View view){

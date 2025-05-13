@@ -51,19 +51,16 @@ public class Fragment_field2 extends Fragment {
         i2 = 0;
         Log.d(LOG_TAG, "Constructor");
     }
-
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         Log.d(LOG_TAG, "onAttach");
     }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(LOG_TAG, "onCreate");
     }
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -72,8 +69,6 @@ public class Fragment_field2 extends Fragment {
         binding = FragmentFieldBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
-
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -219,37 +214,4 @@ public class Fragment_field2 extends Fragment {
         super.onDetach();
         Log.d(LOG_TAG, "onDetach");
     }
-
-
-//    public void getHash() {
-//            Log.d(LOG_TAG, "getting");
-//            String storedHashMapString = sharedPreferences.getString("hashString", "oopsDintWork");
-//            java.lang.reflect.Type type = new TypeToken<HashMap<String,  int[][]>>(){}.getType();
-//            output_hash = gson.fromJson(storedHashMapString, type);
-//            ship_pos_1 = output_hash.get(SHIP);
-//            bomb_pos_1 = output_hash.get(BOMB);
-//
-//    }
-//
-//    private void setHash()
-//    {
-//        input_hash = new HashMap<>();
-//        input_hash.put(SHIP, ship_pos_1);
-//        input_hash.put(BOMB, bomb_pos_1);
-//        gson = new Gson();
-//        String hashMapString = gson.toJson(input_hash);
-//        sharedPreferences.edit().putString("hashString", hashMapString).apply();
-//    }
-//    private void setNullable()
-//    {
-//        input_hash = new HashMap<>();
-//        ship_pos_1 =  new int[4][4];
-//        bomb_pos_1 =  new int[4][4];
-//        input_hash.put(SHIP, ship_pos_1);
-//        input_hash.put(BOMB, bomb_pos_1);
-//        gson = new Gson();
-//        String hashMapString = gson.toJson(input_hash);
-//        sharedPreferences.edit().putString("hashString", hashMapString).apply();
-//    }
-
 }

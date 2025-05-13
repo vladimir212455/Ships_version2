@@ -22,7 +22,7 @@ public class MainViewModel extends AndroidViewModel {
     }
 
     public LiveData<List<user>> getProducts() {
-        return repository.productDao().getProductList();
+        return repository.productDao().getPlayerList();
     }
 
     public void remove(user product) {

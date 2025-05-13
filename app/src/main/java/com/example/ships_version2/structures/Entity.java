@@ -9,34 +9,27 @@ public class Entity {
     private int bomb_pos[][];
     private int size;
     public int hp = 2;
-
     public void setBomb_pos(int[][] bomb_pos) {
         this.bomb_pos = bomb_pos;
     }
-
     public void setShip_pos(int[][] ship_pos) {
         this.ship_pos = ship_pos;
     }
-
     public void setSize(int size) {
         this.size = size;
     }
-
     public Entity(int size) {
         this.bomb_pos = new int[size][size];
         this.ship_pos = new int[size][size];
         this.size = size;
         this.hp = 4;
     }
-
     public int[][] getBomb_pos() {
         return bomb_pos;
     }
-
     public int[][] getShip_pos() {
         return ship_pos;
     }
-
     public void Create_field() {
         Random random = new Random();
         for (int i = 0; i < size; i++) {
@@ -56,7 +49,6 @@ public class Entity {
             }
         }
     }
-
     public int[][] Atack_rand() {
         Random random = new Random();
         int[][] res = new int[size][size];

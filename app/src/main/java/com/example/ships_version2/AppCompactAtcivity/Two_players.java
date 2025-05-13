@@ -27,7 +27,6 @@ import java.util.HashMap;
 public class Two_players extends AppCompatActivity {
     private static final String LOG_TAG = "ActivityPlayingField";
     ActivityTwoPlayersBinding binding;
-
     public static int[][] ship_pos_1;
     public static  int[][] ship_pos_2;
     public static  int[][] bomb_pos_1;
@@ -37,15 +36,6 @@ public class Two_players extends AppCompatActivity {
     public static int hp_player2;
     static public  int i;
     static public  int i2;
-    private SharedPreferences sharedPreferences;
-
-    private final static String BOMB= "bomb";
-    private static final String SHIP = "ship";
-    private static final String FILE_NAME = "data.json";
-    HashMap<String, int[][]> input_hash;
-    HashMap<String, int[][]> output_hash;
-    Gson gson;
-
     public static Intent getInstance(Application context) {
         return new Intent(context, Two_players.class);
     }
@@ -65,42 +55,19 @@ public class Two_players extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-//        getHash();
         Log.d(LOG_TAG, "onResume");
     }
 
     @Override
     public void onPause() {
         super.onPause();
-//        setHash();
         Log.d(LOG_TAG, "onPause");
     }
-//    public void getHash() {
-//            String storedHashMapString = sharedPreferences.getString("hashString", "oopsDintWork");
-//            java.lang.reflect.Type type = new TypeToken<HashMap<String,  int[][]>>(){}.getType();
-//            output_hash = gson.fromJson(storedHashMapString, type);
-//            ship_pos_1 = output_hash.get(SHIP);
-//            bomb_pos_1 = output_hash.get(BOMB);
-//
-//    }
-//
-//    private void setHash()
-//    {
-//        input_hash = new HashMap<>();
-//        input_hash.put(SHIP, ship_pos_1);
-//        input_hash.put(BOMB, bomb_pos_1);
-//        gson = new Gson();
-//        String hashMapString = gson.toJson(input_hash);
-//        sharedPreferences.edit().putString("hashString", hashMapString).apply();
-//    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         binding = ActivityTwoPlayersBinding.inflate(getLayoutInflater());
         super.onCreate(savedInstanceState);
         setContentView(binding.getRoot());
-        //   SharedPreferences sharedPreferences = binding.getRoot().getContext().getSharedPreferences("PreferencesName", MODE_PRIVATE);
-
-
             Log.d(LOG_TAG, "create i");
             replaceFragment();
             replaceFragment2();
@@ -133,35 +100,6 @@ public class Two_players extends AppCompatActivity {
                 }
             });
             thread1.start();
-//        for (int j = 0; j < 4; j++) {
-//            for (int k = 0; k < 4; k++) {
-//                int finalK = j;
-//                int finalJ = k;
-//                buttons[finalJ][finalK].setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                            if (!buttons[finalJ][finalK].isActivated()) {
-//                                if (i <= 2) {
-//                                    ship_pos_1[finalJ][finalK]++;
-//                                    Log.d(LOG_TAG, finalJ + " " + finalK);
-//                                    buttons[finalJ][finalK].setImageResource(R.drawable.boat);
-//                                    i++;
-//                                }
-//                                if (i <= 4 && i > 2) {
-//                                    bomb_pos_1[finalJ][finalK]++;
-//                                    Log.d(LOG_TAG, finalJ + " " + finalK);
-//                                    buttons[finalJ][finalK].setImageResource(R.drawable.bomb);
-//                                    i++;
-//                                }
-//                                if (i== 5) {
-//                                 //  replaceFragment();
-//                                }
-//                            }
-//                }
-//                });
-//            }
-//        }
-
     }
     private void replaceFragment() {
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -187,24 +125,19 @@ public class Two_players extends AppCompatActivity {
                     .commit();
         }
     }
-
     @Override
     public void onStart() {
         super.onStart();
         Log.d(LOG_TAG, "onStart");
     }
-
     @Override
     public void onStop() {
         super.onStop();
-        // setHash();
         Log.d(LOG_TAG, "onStop");
     }
-
     @Override
     public void onDestroy() {
         super.onDestroy();
         Log.d(LOG_TAG, "onDestroy");
     }
-
 }
