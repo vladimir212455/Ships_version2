@@ -17,9 +17,6 @@ public interface PlayersDao {
     @Query("SELECT * FROM user_room ORDER BY name")
     LiveData<List<user>> getPlayerList();
 
-    @Query("SELECT * FROM user_room WHERE id IN (:productsId)")
-    List<user> loadAllByIds(int[] productsId);
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(user... products);
 

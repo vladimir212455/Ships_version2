@@ -1,5 +1,6 @@
 package com.example.ships_version2.AppCompactAtcivity;
 
+import static com.example.ships_version2.AppCompactAtcivity.AuthorizationActivity.username_global;
 import static com.example.ships_version2.AppCompactAtcivity.GameMatch.hours;
 import static com.example.ships_version2.AppCompactAtcivity.GameMatch.minutes;
 import static com.example.ships_version2.AppCompactAtcivity.GameMatch.seconds;
@@ -8,6 +9,7 @@ import static com.example.ships_version2.AppCompactAtcivity.GameMatch.winn_plr;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -19,8 +21,8 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ships_version2.Adapters.PlayersAdapter;
+import com.example.ships_version2.VIewModels.AddNewUsersViewModel;
 import com.example.ships_version2.VIewModels.MainViewModel;
-import com.example.ships_version2.VIewModels.AddNewProductViewModel;
 import com.example.ships_version2.databinding.ActivityGameMenuBinding;
 import com.example.ships_version2.user;
 
@@ -29,7 +31,7 @@ import java.util.Random;
 
 public class Game_Menu extends AppCompatActivity {
     ActivityGameMenuBinding binding;
-    private AddNewProductViewModel main_viewModel;
+    private AddNewUsersViewModel main_viewModel;
     private MainViewModel viewModel;
     private PlayersAdapter arrayAdapter;
     public static Intent getInstance(Context context) {
@@ -43,16 +45,17 @@ public class Game_Menu extends AppCompatActivity {
         Random random1 = new Random();
         int p = random1.nextInt() ;
         Log.d("Game_Menu", p + " ");
-        main_viewModel = new ViewModelProvider(this).get(AddNewProductViewModel.class);
+        main_viewModel = new ViewModelProvider(this).get(AddNewUsersViewModel.class);
+
         if (winn_ent) {
             binding.winer.setText("YOU ARE LOOOOOSE");
-            user product = new user(hours +  " " + minutes + " " + seconds, "you", "LOSE", p);
-            main_viewModel.saveData(product);
+            user players = new user(hours +  " " + minutes + " " + seconds, username_global, "LOSE", p);
+            main_viewModel.saveData(players);
         }
         if (winn_plr) {
             binding.winer.setText("NICE");
-            user product = new user(hours +  " " + minutes + " " + seconds, "you", "WIN",  p);
-            main_viewModel.saveData(product);
+            user players = new user(hours +  " " + minutes + " " + seconds, username_global, "WIN",  p);
+            main_viewModel.saveData(players);
         }
         try {
             viewModel = new ViewModelProvider(this).get(MainViewModel.class);
@@ -85,8 +88,8 @@ public class Game_Menu extends AppCompatActivity {
                     @Override
                     public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                         int position = viewHolder.getAdapterPosition();
-                        user product = arrayAdapter.getItem(position);
-                        viewModel.remove(product);
+                        user player = arrayAdapter.getItem(position);
+                        viewModel.remove(player);
 
                     }
                 });

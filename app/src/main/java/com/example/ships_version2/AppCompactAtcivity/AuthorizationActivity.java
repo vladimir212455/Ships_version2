@@ -15,6 +15,7 @@ public class AuthorizationActivity extends AppCompatActivity {
     private Button buttonLogin;
     private Button buttonRegister;
     private AuthManager authManager;
+    static String username_global;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +30,7 @@ public class AuthorizationActivity extends AppCompatActivity {
     }
     private void handleLogin() {
         String username = editTextUsername.getText().toString().trim();
+        username_global = username;
         String password = editTextPassword.getText().toString().trim();
         if (username.isEmpty() || password.isEmpty()) {
             Toast.makeText(this, "Введите имя пользователя и пароль", Toast.LENGTH_SHORT).show();

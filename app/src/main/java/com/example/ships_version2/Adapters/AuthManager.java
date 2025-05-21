@@ -31,7 +31,6 @@ public class AuthManager {
         try (FileInputStream fis = context.openFileInput(FILE_NAME);
              InputStreamReader isr = new InputStreamReader(fis, StandardCharsets.UTF_8);
              BufferedReader reader = new BufferedReader(isr)) {
-
             StringBuilder stringBuilder = new StringBuilder();
             String line;
             while ((line = reader.readLine()) != null) {
@@ -39,7 +38,6 @@ public class AuthManager {
             }
             Type userListType = new TypeToken<ArrayList<User_authorization>>(){}.getType();
             users = gson.fromJson(stringBuilder.toString(), userListType);
-
             if (users == null) {
                 users = new ArrayList<>();
             }
@@ -73,7 +71,7 @@ public class AuthManager {
             }
             return hexString.toString();
         } catch (NoSuchAlgorithmException e) {
-            Log.e(TAG, "SHA-256 Algorithm not found", e);
+            Log.e(TAG, "Algorithm not found", e);
             return null;
         }
     }
